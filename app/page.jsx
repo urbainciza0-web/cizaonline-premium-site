@@ -1,22 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
   BarChart3,
+  BellRing,
   BookOpenCheck,
   CheckCircle2,
   ChevronDown,
   Coins,
+  Crown,
   FileText,
   Gem,
   Globe2,
   LockKeyhole,
   Menu,
   MessageCircle,
+  Orbit,
+  Radar,
   ShieldCheck,
   Sparkles,
   Star,
@@ -33,100 +37,161 @@ const paymentUrl = "https://cizaonline.live/inscription";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } }
+  show: { opacity: 1, y: 0, transition: { duration: 0.62, ease: "easeOut" } }
 };
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.09 } }
+  show: { transition: { staggerChildren: 0.08 } }
 };
 
 const navItems = [
-  { label: "Pourquoi", href: "#pourquoi" },
+  { label: "Terminal", href: "#terminal" },
   { label: "Offre", href: "#offre" },
-  { label: "Temoignages", href: "#temoignages" },
+  { label: "Confiance", href: "#confiance" },
   { label: "FAQ", href: "#faq" }
 ];
 
 const socialProof = [
-  { value: "+5 000", label: "membres accompagnes" },
-  { value: "+120", label: "temoignages verifies" },
-  { value: "RDC & Afrique", label: "francophone connectee" },
-  { value: "WhatsApp + Telegram", label: "canaux actifs" }
+  { value: "5 000+", label: "membres formes", detail: "Afrique francophone" },
+  { value: "120+", label: "retours verifies", detail: "WhatsApp et Telegram" },
+  { value: "24/7", label: "veille marche", detail: "BTC, ETH, USDT, BNB" },
+  { value: "6$", label: "acces mensuel", detail: "abonnement clair" }
 ];
 
 const markets = [
-  ["BTC", "Bitcoin", "+4.8%", "$68,420"],
-  ["ETH", "Ethereum", "+3.2%", "$3,780"],
-  ["USDT", "Tether", "+0.1%", "$1.00"],
-  ["BNB", "BNB", "+2.1%", "$604"]
+  ["BTC", "Bitcoin", "+4.82%", "$68,420", 78],
+  ["ETH", "Ethereum", "+3.24%", "$3,780", 64],
+  ["BNB", "BNB", "+2.18%", "$604", 58],
+  ["SOL", "Solana", "+7.41%", "$174", 86],
+  ["USDT", "Tether", "+0.01%", "$1.00", 42]
 ];
 
 const advantages = [
-  ["Formation adaptee aux realites africaines", "Cas concrets, mobile first, vocabulaire clair et decisions applicables.", BookOpenCheck],
-  ["Mobile Money / USDT / Binance", "Comprendre les passerelles utilisees au quotidien par la communaute.", WalletCards],
-  ["Gestion du risque", "Taille de position, plan d'entree, sortie, stop et protection du capital.", ShieldCheck],
-  ["Pas de promesses irrealistes", "Une approche responsable: education, prudence et discipline avant tout.", BadgeCheck],
-  ["Communaute active", "Echanges encadres, lives, retours d'experience et progression collective.", UsersRound],
-  ["Support WhatsApp / Telegram", "Accompagnement simple, rapide et accessible depuis les canaux que tu utilises deja.", MessageCircle]
+  ["Academie mobile first", "Modules courts, checklists pratiques et vocabulaire clair pour progresser meme depuis smartphone.", BookOpenCheck],
+  ["Trading terminal prive", "Watchlist, plans de risque, niveaux importants et alertes educatives pour garder le cap.", BarChart3],
+  ["Wallet security", "Process de protection, hygiene des seed phrases, stablecoins et erreurs a eviter.", ShieldCheck],
+  ["Execution responsable", "Pas de promesses rapides: methode, discipline, capital protege et decisions mieux documentees.", BadgeCheck],
+  ["Communaute premium", "Un canal encadre pour apprendre, poser des questions et rester loin du bruit.", UsersRound],
+  ["Afrique-ready", "Mobile Money, USDT, Binance et habitudes locales integrees au parcours.", WalletCards]
 ];
 
 const offerItems = [
-  ["Acces communaute privee", UsersRound],
+  ["Communaute privee WhatsApp / Telegram", UsersRound],
   ["Formation crypto debutant a intermediaire", BookOpenCheck],
-  ["Checklists pratiques", CheckCircle2],
-  ["Alertes marche", TrendingUp],
-  ["Lives / analyses", BarChart3],
-  ["Support WhatsApp", MessageCircle],
-  ["Ressources PDF", FileText]
+  ["Mini dashboard marche et alertes educatives", BellRing],
+  ["Checklists wallet, achat, vente, risque", CheckCircle2],
+  ["Lives et analyses hebdomadaires", BarChart3],
+  ["Ressources PDF premium", FileText]
 ];
 
 const testimonials = [
   {
-    initials: "PK",
-    name: "Patrick",
-    place: "Kinshasa, RDC",
-    text: "Grace a CizaOnline, j'ai arrete les trades impulsifs et j'ai appris a gerer mon risque.",
-    result: "Plan de trading stabilise"
+    initials: "DK",
+    name: "David K.",
+    place: "Kinshasa",
+    text: "J'ai enfin compris comment acheter sans paniquer, securiser mon wallet et attendre mes niveaux.",
+    result: "Routine d'investissement claire"
   },
   {
-    initials: "AN",
-    name: "Ariane",
-    place: "Lubumbashi, RDC",
-    text: "Je comprenais les cryptos de loin. Aujourd'hui je sais proteger mon wallet et acheter avec methode.",
-    result: "Premier portefeuille securise"
+    initials: "MA",
+    name: "Merveille A.",
+    place: "Lubumbashi",
+    text: "Le groupe est calme, structure et professionnel. On apprend a reflechir avant de cliquer.",
+    result: "Wallet securise en 7 jours"
   },
   {
-    initials: "JM",
-    name: "Joel",
-    place: "Abidjan, Cote d'Ivoire",
-    text: "La difference, c'est le cadre. Pas de bruit, pas de pression, juste des analyses et des actions simples.",
-    result: "Routine hebdomadaire claire"
+    initials: "EL",
+    name: "Eli L.",
+    place: "Abidjan",
+    text: "CizaOnline ressemble plus a un desk prive qu'a un groupe crypto. C'est exactement ce qu'il me fallait.",
+    result: "Plan de risque applique"
   }
+];
+
+const trustBadges = [
+  ["Education responsable", ShieldCheck],
+  ["Mobile Money ready", WalletCards],
+  ["Stablecoin literacy", Coins],
+  ["No hype promise", LockKeyhole]
 ];
 
 const faqs = [
   {
     q: "Est-ce adapte aux debutants ?",
-    a: "Oui. Le parcours commence par les bases: wallet, stablecoins, vocabulaire, securite, puis avance vers l'analyse et la gestion du risque."
+    a: "Oui. Le parcours commence par les bases: wallet, stablecoins, securite, vocabulaire, puis avance vers l'analyse et la gestion du risque."
   },
   {
     q: "Est-ce que CizaOnline promet des gains ?",
-    a: "Non. CizaOnline ne vend pas de promesses rapides. La proposition repose sur la methode, la prudence, l'education et la discipline."
+    a: "Non. CizaOnline vend un cadre d'apprentissage, pas une promesse de rendement. L'objectif est de construire de meilleures decisions."
   },
   {
     q: "Comment rejoindre le groupe ?",
-    a: "Tu peux demander l'acces via WhatsApp ou Telegram. L'equipe te dirige ensuite vers le canal adapte a ton niveau."
+    a: "Tu demandes l'acces via WhatsApp, Telegram ou la page d'inscription. L'equipe confirme ensuite le canal adapte a ton niveau."
   },
   {
-    q: "Est-ce que le paiement mobile money est accepte ?",
-    a: "Oui, l'offre est pensee pour l'Afrique francophone. Les modalites de paiement sont confirmees lors de la demande d'acces."
-  },
-  {
-    q: "Quelle est la difference avec les groupes crypto gratuits ?",
-    a: "CizaOnline met l'accent sur le cadre, la qualite des ressources, le suivi, les checklists et la prevention des erreurs courantes."
+    q: "Le paiement Mobile Money est accepte ?",
+    a: "Oui, selon le pays et le canal de validation. L'offre est pensee pour l'Afrique francophone."
   }
 ];
+
+function isExternalUrl(href) {
+  return href && !href.startsWith("#");
+}
+
+function LogoMark({ compact = false }) {
+  return (
+    <span className="group/logo flex items-center gap-3">
+      <span className="logo-mark relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border border-ciza-gold/40 bg-black text-ciza-gold shadow-gold">
+        <span className="absolute inset-1 rounded-[0.85rem] border border-white/10" />
+        <span className="absolute h-12 w-12 rounded-full border border-ciza-gold/25" />
+        <span className="absolute h-5 w-5 rounded-full bg-ciza-gold/18 blur-md" />
+        <span className="relative font-display text-lg font-black">C</span>
+      </span>
+      {compact ? null : (
+        <span>
+          <span className="block font-display text-lg font-black leading-none text-white">CizaOnline</span>
+          <span className="mt-1 block text-[0.62rem] font-bold uppercase tracking-[0.22em] text-ciza-gold/80">
+            Crypto Academy
+          </span>
+        </span>
+      )}
+    </span>
+  );
+}
+
+function PrimaryButton({ children, href = paymentUrl }) {
+  const external = isExternalUrl(href);
+  return (
+    <motion.a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      whileHover={{ y: -3, scale: 1.015 }}
+      whileTap={{ scale: 0.97 }}
+      className="premium-button group inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-center text-sm font-black text-black sm:w-auto sm:px-7"
+    >
+      {children}
+      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+    </motion.a>
+  );
+}
+
+function SecondaryButton({ children, href }) {
+  const external = isExternalUrl(href);
+  return (
+    <motion.a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      whileHover={{ y: -3 }}
+      whileTap={{ scale: 0.98 }}
+      className="inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.055] px-5 py-3.5 text-center text-sm font-bold text-white shadow-panel backdrop-blur-xl transition hover:border-ciza-gold/60 hover:bg-ciza-gold/10 sm:w-auto sm:px-6"
+    >
+      {children}
+    </motion.a>
+  );
+}
 
 function SectionHeader({ eyebrow, title, text }) {
   return (
@@ -137,53 +202,137 @@ function SectionHeader({ eyebrow, title, text }) {
       whileInView="show"
       viewport={{ once: true, margin: "-80px" }}
     >
-      <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.24em] text-ciza-gold">
-        {eyebrow}
-      </p>
-      <h2 className="font-display text-3xl font-semibold leading-tight text-white md:text-5xl">
-        {title}
-      </h2>
-      <p className="mt-4 text-sm leading-7 text-white/68 sm:text-base md:mt-5 md:text-lg md:leading-8">{text}</p>
+      <p className="mb-3 font-display text-xs font-black uppercase tracking-[0.24em] text-ciza-gold">{eyebrow}</p>
+      <h2 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">{title}</h2>
+      <p className="mt-4 text-sm leading-7 text-white/68 sm:text-base md:text-lg md:leading-8">{text}</p>
     </motion.div>
   );
 }
 
-function isExternalUrl(href) {
-  return href && !href.startsWith("#");
-}
-
-function PrimaryButton({ children, href = paymentUrl }) {
-  const external = isExternalUrl(href);
-
+function HeroBackground() {
   return (
-    <motion.a
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-      whileHover={{ y: -3, scale: 1.015 }}
-      whileTap={{ scale: 0.98 }}
-      className="gold-glow group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-ciza-gold px-5 py-3 text-center text-sm font-black text-black shadow-gold transition hover:bg-ciza-ivory sm:w-auto sm:px-7"
-    >
-      {children}
-      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
-    </motion.a>
+    <div className="absolute inset-0 overflow-hidden">
+      <Image
+        src="/images/ciza-hero.png"
+        alt="CizaOnline crypto premium"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[64%_center] opacity-36 sm:opacity-46"
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(244,197,66,.22),transparent_24rem),linear-gradient(90deg,#030303_0%,rgba(3,3,3,.92)_32%,rgba(3,3,3,.68)_62%,rgba(3,3,3,.42)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,3,.72)_0%,rgba(3,3,3,.18)_42%,#050505_100%)]" />
+      <div className="cinema-light absolute -right-24 top-24 h-72 w-72 rounded-full bg-ciza-gold/18 blur-3xl" />
+      <div className="data-grid absolute inset-0" />
+      <div className="hero-orbit hero-orbit-one" />
+      <div className="hero-orbit hero-orbit-two" />
+      <div className="floating-coin left-[78%] top-[22%] hidden lg:grid">B</div>
+      <div className="floating-coin left-[62%] top-[58%] hidden lg:grid">₮</div>
+    </div>
   );
 }
 
-function SecondaryButton({ children, href }) {
-  const external = isExternalUrl(href);
-
+function MarketTerminal() {
+  const bars = useMemo(() => [35, 54, 48, 72, 61, 84, 69, 92, 78, 96, 88, 104, 94, 116], []);
   return (
-    <motion.a
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-      whileHover={{ y: -3 }}
-      whileTap={{ scale: 0.98 }}
-      className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-ciza-gold/32 bg-black/35 px-5 py-3 text-center text-sm font-bold text-white transition hover:border-ciza-gold hover:bg-ciza-gold/10 sm:w-auto sm:px-6"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.94, y: 28 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.78, ease: "easeOut", delay: 0.2 }}
+      className="terminal-card gold-border glass relative mx-auto w-full max-w-[28rem] rounded-[1.65rem] p-4 shadow-gold sm:p-5"
     >
-      {children}
-    </motion.a>
+      <div className="mb-5 flex items-center justify-between">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/42">Ciza Market Pulse</p>
+          <p className="mt-2 font-display text-3xl font-black text-white">Global Desk</p>
+        </div>
+        <span className="inline-flex items-center gap-2 rounded-full border border-ciza-emerald/25 bg-ciza-emerald/10 px-3 py-1 text-xs font-black text-ciza-emerald">
+          <span className="h-2 w-2 rounded-full bg-ciza-emerald shadow-[0_0_16px_rgba(24,211,158,.8)]" />
+          LIVE
+        </span>
+      </div>
+      <div className="rounded-3xl border border-white/8 bg-black/36 p-4">
+        <div className="mb-4 flex items-end justify-between">
+          <div>
+            <p className="text-sm text-white/46">Portfolio discipline</p>
+            <p className="font-display text-3xl font-black text-white">$12,840</p>
+          </div>
+          <p className="rounded-full bg-ciza-gold/14 px-3 py-1 text-sm font-black text-ciza-gold">+18.4%</p>
+        </div>
+        <div className="terminal-chart relative h-32 overflow-hidden rounded-2xl border border-ciza-gold/12 bg-[linear-gradient(180deg,rgba(244,197,66,.12),rgba(255,255,255,.025))] p-3">
+          <div className="absolute inset-x-3 top-1/2 h-px bg-ciza-gold/16" />
+          <svg className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)]" viewBox="0 0 320 110" aria-hidden="true">
+            <motion.path
+              d="M0 82 C28 62 38 76 62 52 S104 64 126 38 172 56 196 28 242 24 266 42 296 18 320 22"
+              fill="none"
+              stroke="url(#chartGold)"
+              strokeWidth="4"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1.4, ease: "easeOut" }}
+            />
+            <defs>
+              <linearGradient id="chartGold" x1="0" y1="0" x2="1" y2="0">
+                <stop stopColor="#fff8e6" />
+                <stop offset="0.5" stopColor="#f4c542" />
+                <stop offset="1" stopColor="#18d39e" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div className="absolute bottom-3 left-3 right-3 flex items-end gap-1.5 opacity-50">
+            {bars.map((height, index) => (
+              <motion.span
+                key={index}
+                initial={{ height: 16 }}
+                animate={{ height }}
+                transition={{ duration: 0.75, delay: index * 0.03 }}
+                className="flex-1 rounded-t-full bg-ciza-gold/70"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="mt-4 grid gap-2">
+        {markets.map(([ticker, name, move, price, score]) => (
+          <div key={ticker} className="market-row grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.035] p-3">
+            <span className="grid h-10 w-10 place-items-center rounded-full border border-ciza-gold/20 bg-ciza-gold/12 text-xs font-black text-ciza-gold">
+              {ticker}
+            </span>
+            <div className="min-w-0">
+              <div className="flex items-center justify-between gap-3">
+                <p className="truncate font-bold text-white">{name}</p>
+                <p className="font-semibold text-white">{price}</p>
+              </div>
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/8">
+                <motion.span
+                  initial={{ width: "18%" }}
+                  whileInView={{ width: `${score}%` }}
+                  viewport={{ once: true }}
+                  className="block h-full rounded-full bg-[linear-gradient(90deg,#f4c542,#18d39e)]"
+                />
+              </div>
+            </div>
+            <p className="text-sm font-black text-ciza-emerald">{move}</p>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function Avatar({ initials, index }) {
+  const gradients = [
+    "from-ciza-gold/90 via-white/80 to-ciza-emerald/70",
+    "from-ciza-emerald/75 via-ciza-gold/80 to-white/70",
+    "from-white/80 via-ciza-gold/75 to-ciza-goldDeep/80"
+  ];
+  return (
+    <span className={`grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${gradients[index % gradients.length]} p-px shadow-gold`}>
+      <span className="grid h-full w-full place-items-center rounded-2xl bg-black font-display font-black text-ciza-gold">
+        {initials}
+      </span>
+    </span>
   );
 }
 
@@ -192,31 +341,19 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-ciza-black text-ciza-ivory">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-black/58 backdrop-blur-2xl">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <a href="#" className="flex items-center gap-3" aria-label="CizaOnline accueil">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-ciza-gold text-lg font-black text-black shadow-gold">
-              C
-            </span>
-            <span className="font-display text-lg font-bold text-white">CizaOnline</span>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-black/62 backdrop-blur-2xl">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+          <a href="#" aria-label="CizaOnline accueil">
+            <LogoMark />
           </a>
           <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-white/66 transition hover:text-ciza-gold"
-              >
+              <a key={item.label} href={item.href} className="text-sm font-semibold text-white/62 transition hover:text-ciza-gold">
                 {item.label}
               </a>
             ))}
           </div>
-          <a
-            href={paymentUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-black text-black transition hover:bg-ciza-gold sm:inline-flex"
-          >
+          <a href={paymentUrl} target="_blank" rel="noopener noreferrer" className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-black text-black transition hover:bg-ciza-gold sm:inline-flex">
             Rejoindre
           </a>
           <button
@@ -230,163 +367,67 @@ export default function HomePage() {
           </button>
         </nav>
         {mobileMenuOpen ? (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="border-t border-white/8 bg-ciza-black/96 px-4 pb-5 pt-3 shadow-panel sm:hidden"
-          >
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="border-t border-white/8 bg-ciza-black/96 px-4 pb-5 pt-3 shadow-panel sm:hidden">
             <div className="grid gap-2">
               {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-2xl border border-white/8 bg-white/[0.035] px-4 py-3 text-sm font-semibold text-white/76"
-                >
+                <a key={item.label} href={item.href} onClick={() => setMobileMenuOpen(false)} className="rounded-2xl border border-white/8 bg-white/[0.035] px-4 py-3 text-sm font-semibold text-white/76">
                   {item.label}
                 </a>
               ))}
-              <a
-                href={paymentUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 rounded-2xl bg-ciza-gold px-4 py-3 text-center text-sm font-black text-black"
-              >
-                Rejoindre
+              <a href={paymentUrl} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="mt-2 rounded-2xl bg-ciza-gold px-4 py-3 text-center text-sm font-black text-black">
+                Rejoindre pour 6$/mois
               </a>
             </div>
           </motion.div>
         ) : null}
       </header>
 
-      <section className="relative flex min-h-[92vh] items-center pt-24 sm:pt-28">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/ciza-hero.png"
-            alt="Interface crypto premium CizaOnline"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[62%_center] opacity-42 sm:object-center sm:opacity-62 lg:opacity-74"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,.9)_0%,rgba(5,5,5,.76)_50%,#050505_100%)] sm:bg-[linear-gradient(90deg,#050505_0%,rgba(5,5,5,.92)_32%,rgba(5,5,5,.67)_58%,rgba(5,5,5,.28)_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-ciza-black to-transparent" />
-        </div>
-
-        <div className="pointer-events-none absolute left-[9%] top-[18%] h-32 w-32 rounded-full bg-ciza-gold/18 blur-3xl sm:h-44 sm:w-44" />
-
-        <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 pb-12 pt-8 sm:px-6 sm:pb-16 sm:pt-10 lg:grid-cols-[1.02fr_.98fr] lg:px-8">
+      <section className="relative flex min-h-[96vh] items-center pt-24 sm:pt-28">
+        <HeroBackground />
+        <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 pb-14 pt-8 sm:px-6 lg:grid-cols-[1.02fr_.98fr] lg:px-8">
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-3xl">
-            <motion.div
-              variants={fadeUp}
-              className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-ciza-gold/30 bg-ciza-gold/10 px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-ciza-gold sm:mb-6 sm:px-4 sm:text-xs sm:tracking-[0.18em]"
-            >
+            <motion.div variants={fadeUp} className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-ciza-gold/30 bg-ciza-gold/10 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.14em] text-ciza-gold sm:px-4 sm:text-xs sm:tracking-[0.18em]">
               <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
-              <span className="truncate sm:whitespace-normal">Tunnel crypto premium pour l'Afrique francophone</span>
+              <span className="truncate sm:whitespace-normal">Plateforme crypto premium pour l'Afrique francophone</span>
             </motion.div>
-            <motion.h1
-              variants={fadeUp}
-              className="max-w-[12ch] font-display text-4xl font-semibold leading-[1.02] text-white min-[380px]:text-5xl sm:max-w-none sm:text-6xl lg:text-7xl"
-            >
-              Maitrise la crypto avec{" "}
-              <motion.span
-                className="gold-text inline-block"
-                animate={{ filter: ["drop-shadow(0 0 0 rgba(244,197,66,0))", "drop-shadow(0 0 24px rgba(244,197,66,.35))", "drop-shadow(0 0 0 rgba(244,197,66,0))"] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                methode et discipline.
-              </motion.span>
+            <motion.h1 variants={fadeUp} className="max-w-[11ch] font-display text-4xl font-black leading-[1.02] text-white min-[380px]:text-5xl sm:max-w-none sm:text-6xl lg:text-7xl">
+              Le desk crypto prive pour apprendre, investir et{" "}
+              <span className="gold-text inline-block">executer avec discipline.</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-7 text-white/74 sm:mt-7 sm:text-lg sm:leading-8">
-              CizaOnline combine formation, communaute privee, alertes marche et support direct
-              pour aider les francophones d'Afrique a progresser sans promesses irreelles.
+            <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-7 text-white/74 sm:text-lg sm:leading-8">
+              CizaOnline transforme l'apprentissage crypto en experience premium: formation, communaute,
+              alertes educatives, dashboard marche et support direct pour progresser sans bruit.
             </motion.p>
-            <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-4">
-              <PrimaryButton href={paymentUrl}>Rejoindre CizaOnline maintenant</PrimaryButton>
-              <SecondaryButton href="#offre">
-                <Gem className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
-                Voir l'offre
+            <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-2">
+              {trustBadges.map(([label, Icon]) => (
+                <span key={label} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-bold text-white/70 backdrop-blur-xl">
+                  <Icon className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
+                  {label}
+                </span>
+              ))}
+            </motion.div>
+            <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
+              <PrimaryButton href={paymentUrl}>Rejoindre pour 6$/mois</PrimaryButton>
+              <SecondaryButton href="#terminal">
+                <Radar className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
+                Voir le terminal
               </SecondaryButton>
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 34 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: "easeOut", delay: 0.18 }}
-            className="hidden self-end lg:block"
-          >
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="gold-border glass ml-auto max-w-md rounded-[2rem] p-5 shadow-panel"
-            >
-              <div className="mb-5 flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-white/50">Indice discipline</p>
-                  <p className="font-display text-3xl font-semibold text-white">CIZA 100</p>
-                </div>
-                <div className="rounded-full bg-ciza-emerald/14 px-3 py-1 text-sm font-bold text-ciza-emerald">
-                  +18.4%
-                </div>
-              </div>
-              <div className="mb-5 h-28 rounded-2xl border border-ciza-gold/15 bg-[linear-gradient(145deg,rgba(244,197,66,.2),rgba(255,255,255,.035))] p-4">
-                <div className="flex h-full items-end gap-2">
-                  {[34, 52, 44, 70, 56, 76, 88, 68, 94, 82, 100, 91].map((height, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ height: "18%" }}
-                      animate={{ height: `${height}%` }}
-                      transition={{ duration: 0.7, delay: index * 0.04 }}
-                      className="flex-1 rounded-t-full bg-ciza-gold/85"
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-3">
-                {markets.map(([ticker, name, move, price]) => (
-                  <div
-                    key={ticker}
-                    className="flex items-center justify-between rounded-2xl border border-white/8 bg-white/[0.035] px-4 py-3"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-xs font-black text-black">
-                        {ticker}
-                      </span>
-                      <div>
-                        <p className="font-semibold text-white">{name}</p>
-                        <p className="text-xs text-white/42">{ticker}/USDT</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold text-white">{price}</p>
-                      <p className="text-sm font-bold text-ciza-emerald">{move}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+          <div id="terminal" className="lg:self-end">
+            <MarketTerminal />
+          </div>
         </div>
       </section>
 
       <section className="px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4"
-        >
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {socialProof.map((item) => (
-            <motion.div
-              key={item.label}
-              variants={fadeUp}
-              className="rounded-3xl border border-ciza-gold/24 bg-white/[0.035] p-6 shadow-panel"
-            >
-              <p className="font-display text-2xl font-bold text-white">{item.value}</p>
-              <p className="mt-2 text-sm leading-6 text-white/56">{item.label}</p>
+            <motion.div key={item.label} variants={fadeUp} className="stat-card rounded-3xl border border-ciza-gold/18 bg-white/[0.035] p-5 shadow-panel sm:p-6">
+              <p className="font-display text-3xl font-black text-white">{item.value}</p>
+              <p className="mt-2 text-sm font-bold text-ciza-gold">{item.label}</p>
+              <p className="mt-1 text-sm leading-6 text-white/50">{item.detail}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -395,39 +436,28 @@ export default function HomePage() {
       <section className="ticker-shell border-y border-ciza-gold/20 py-3 sm:py-4">
         <div className="marquee-track gap-2 whitespace-nowrap sm:gap-4">
           {[...Array(2)].flatMap((_, group) =>
-            ["Bitcoin", "USDT", "Mobile Money", "Risk Management", "Binance", "Wallet Security", "Afrique Web3", "Trading Plan"].map(
-              (item) => (
-                <span
-                  key={`${group}-${item}`}
-                  className="mx-2 inline-flex items-center gap-2 rounded-full border border-ciza-gold/20 bg-black/40 px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-white/60 sm:mx-4 sm:gap-3 sm:px-4 sm:text-sm sm:tracking-[0.18em]"
-                >
-                  <Star className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
-                  {item}
-                </span>
-              )
-            )
+            ["BTC +4.82%", "ETH +3.24%", "USDT rails", "Wallet security", "Risk desk", "Binance workflow", "Mobile Money", "Afrique Web3"].map((item) => (
+              <span key={`${group}-${item}`} className="mx-2 inline-flex items-center gap-2 rounded-full border border-ciza-gold/20 bg-black/40 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.14em] text-white/60 sm:mx-4 sm:px-4 sm:text-sm">
+                <Star className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
+                {item}
+              </span>
+            ))
           )}
         </div>
       </section>
 
-      <section id="pourquoi" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <section id="confiance" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Pourquoi choisir CizaOnline ?"
-            title="Un cadre serieux pour apprendre la crypto sans bruit."
-            text="Le positionnement est simple: moins de promesses, plus de methode, plus de securite, plus de communaute."
+            eyebrow="Identite CizaOnline"
+            title="Une experience qui ressemble a une fintech mondiale."
+            text="Le site met en avant un cadre serieux: terminal visuel, signaux educatifs, protection du capital et communaute structuree."
           />
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            className="mt-10 grid gap-4 sm:mt-14 md:grid-cols-2 lg:grid-cols-3"
-          >
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="mt-10 grid gap-4 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
             {advantages.map(([title, text, Icon]) => (
-              <motion.article key={title} variants={fadeUp} className="gold-border glass rounded-3xl p-5 sm:p-7">
+              <motion.article key={title} variants={fadeUp} className="gold-border glass feature-card rounded-3xl p-5 sm:p-7">
                 <Icon className="mb-5 h-8 w-8 text-ciza-gold sm:mb-7 sm:h-9 sm:w-9" aria-hidden="true" />
-                <h3 className="font-display text-lg font-semibold text-white sm:text-xl">{title}</h3>
+                <h3 className="font-display text-lg font-black text-white sm:text-xl">{title}</h3>
                 <p className="mt-3 text-sm leading-7 text-white/62 sm:mt-4 sm:text-base">{text}</p>
               </motion.article>
             ))}
@@ -435,32 +465,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="offre" className="bg-white/[0.025] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_.72fr] lg:items-stretch">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}
-            className="gold-border glass rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-6 md:p-9"
-          >
-            <motion.p variants={fadeUp} className="font-display text-xs font-semibold uppercase tracking-[0.24em] text-ciza-gold">
-              Offre CizaOnline
+      <section id="offre" className="relative overflow-hidden bg-white/[0.025] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="absolute inset-x-0 top-0 h-px bg-gold-line" />
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_.74fr] lg:items-stretch">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="gold-border glass rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-8 md:p-10">
+            <motion.p variants={fadeUp} className="font-display text-xs font-black uppercase tracking-[0.24em] text-ciza-gold">
+              Offre premium
             </motion.p>
-            <motion.h2 variants={fadeUp} className="mt-4 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
-              Ce que tu recois en rejoignant CizaOnline
+            <motion.h2 variants={fadeUp} className="mt-4 font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+              L'abonnement crypto qui donne une structure a tes decisions.
             </motion.h2>
             <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-              Une experience premium pour passer de la curiosite crypto a une pratique plus claire,
-              plus prudente et plus accompagnee.
+              Chaque element sert une chose: t'aider a apprendre, securiser, filtrer le bruit et passer a l'action avec methode.
             </motion.p>
             <motion.div variants={stagger} className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
               {offerItems.map(([item, Icon]) => (
-                <motion.div
-                  key={item}
-                  variants={fadeUp}
-                  className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.035] p-3.5 sm:p-4"
-                >
+                <motion.div key={item} variants={fadeUp} className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.035] p-3.5 sm:p-4">
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ciza-gold/14 text-ciza-gold">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
@@ -470,66 +490,60 @@ export default function HomePage() {
             </motion.div>
           </motion.div>
 
-          <motion.aside
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.65, ease: "easeOut" }}
-            className="rounded-[1.5rem] border border-ciza-gold/28 bg-[linear-gradient(145deg,rgba(244,197,66,.2),rgba(255,255,255,.04)_45%,rgba(0,0,0,.34))] p-5 shadow-gold sm:rounded-[2rem] sm:p-7"
-          >
-            <p className="inline-flex rounded-full bg-black/40 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-ciza-gold">
-              Acces premium
-            </p>
+          <motion.aside initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.65, ease: "easeOut" }} className="pricing-card rounded-[1.5rem] border border-ciza-gold/30 p-5 shadow-gold sm:rounded-[2rem] sm:p-7">
+            <div className="flex items-center justify-between gap-4">
+              <p className="inline-flex items-center gap-2 rounded-full bg-black/40 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-ciza-gold">
+                <Crown className="h-4 w-4" aria-hidden="true" />
+                Acces premium
+              </p>
+              <p className="rounded-full border border-ciza-emerald/25 bg-ciza-emerald/10 px-3 py-1 text-xs font-black text-ciza-emerald">
+                Actif
+              </p>
+            </div>
             <div className="mt-8">
-              <p className="text-sm text-white/56">A partir de</p>
-              <p className="mt-1 font-display text-4xl font-black text-white sm:text-5xl">6$/mois</p>
+              <p className="text-sm font-semibold text-white/56">A partir de</p>
+              <p className="mt-1 font-display text-5xl font-black text-white sm:text-6xl">6$<span className="text-lg text-white/46">/mois</span></p>
               <p className="mt-4 leading-7 text-white/64">
-                Ideal pour demarrer avec une communaute serieuse, des ressources utiles et un
-                cadre qui protege ton capital.
+                Une porte d'entree premium pour apprendre avec une communaute serieuse, des ressources utiles et un cadre qui protege ton capital.
               </p>
             </div>
             <div className="mt-8 grid gap-3">
-              <PrimaryButton href={paymentUrl}>Demander l'acces</PrimaryButton>
+              <PrimaryButton href={paymentUrl}>Demander l'acces maintenant</PrimaryButton>
               <SecondaryButton href={whatsappUrl}>
                 <MessageCircle className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
                 Parler a l'equipe
               </SecondaryButton>
             </div>
-            <div className="mt-8 border-t border-white/10 pt-5 text-sm leading-6 text-white/50">
-              Paiement mobile money accepte selon pays et canal de validation.
+            <div className="mt-8 grid grid-cols-3 gap-2 border-t border-white/10 pt-5">
+              {["Wallet", "USDT", "Risk"].map((item) => (
+                <span key={item} className="rounded-2xl border border-white/8 bg-black/24 px-3 py-3 text-center text-xs font-black text-white/62">
+                  {item}
+                </span>
+              ))}
             </div>
           </motion.aside>
         </div>
       </section>
 
-      <section id="temoignages" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Temoignages"
-            title="Des retours realistes, centres sur la discipline."
-            text="Les membres parlent surtout de clarte, de prudence et de meilleures habitudes. C'est la bonne base pour durer."
+            eyebrow="Social proof"
+            title="Des retours realistes, plus proches d'un desk que d'un groupe bruyant."
+            text="Les membres parlent de clarte, de securite et de discipline. C'est la base d'une marque crypto durable."
           />
           <div className="mt-10 grid gap-4 sm:mt-14 lg:grid-cols-3">
             {testimonials.map((item, index) => (
-              <motion.article
-                key={item.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
-                className="rounded-3xl border border-ciza-gold/18 bg-ciza-graphite p-5 shadow-panel sm:p-7"
-              >
+              <motion.article key={item.name} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: index * 0.08 }} className="testimonial-card rounded-3xl border border-ciza-gold/18 bg-ciza-graphite p-5 shadow-panel sm:p-7">
                 <div className="mb-6 flex items-center gap-4">
-                  <span className="grid h-12 w-12 place-items-center rounded-full border border-ciza-gold/40 bg-ciza-gold/14 font-display font-black text-ciza-gold">
-                    {item.initials}
-                  </span>
+                  <Avatar initials={item.initials} index={index} />
                   <div>
                     <p className="font-semibold text-white">{item.name}</p>
                     <p className="text-sm text-white/46">{item.place}</p>
                   </div>
                 </div>
                 <p className="leading-8 text-white/72">"{item.text}"</p>
-                <p className="mt-6 inline-flex rounded-full bg-ciza-gold/12 px-3 py-1 text-xs font-bold text-ciza-gold">
+                <p className="mt-6 inline-flex rounded-full bg-ciza-gold/12 px-3 py-1 text-xs font-black text-ciza-gold">
                   {item.result}
                 </p>
               </motion.article>
@@ -539,70 +553,28 @@ export default function HomePage() {
       </section>
 
       <section id="inscription" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] border border-ciza-gold/24 bg-[linear-gradient(135deg,rgba(244,197,66,.2),rgba(255,255,255,.04)_38%,rgba(24,211,158,.12))] p-5 shadow-gold sm:rounded-[2rem] sm:p-6 md:p-10">
+        <div className="cta-panel mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] border border-ciza-gold/24 p-5 shadow-gold sm:rounded-[2rem] sm:p-7 md:p-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_.82fr] lg:items-center">
             <div>
-              <p className="font-display text-xs font-semibold uppercase tracking-[0.24em] text-ciza-gold">
-                WhatsApp / Telegram
-              </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
+              <p className="font-display text-xs font-black uppercase tracking-[0.24em] text-ciza-gold">WhatsApp / Telegram</p>
+              <h2 className="mt-4 font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
                 Entre dans le canal qui correspond a ton niveau.
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">
-                Tu demandes l'acces, l'equipe valide ton profil, puis tu rejoins la communaute
-                adaptee: debutant, investisseur actif ou entrepreneur Web3.
+                Tu demandes l'acces, l'equipe valide ton profil, puis tu rejoins la communaute adaptee: debutant, investisseur actif ou entrepreneur Web3.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex min-h-16 items-center justify-between rounded-3xl bg-white p-4 text-black transition hover:-translate-y-1 hover:bg-ciza-gold sm:p-5"
-              >
-                <span className="flex items-center gap-4">
-                  <MessageCircle className="h-7 w-7" aria-hidden="true" />
-                  <span>
-                    <span className="block font-display text-xl font-bold">WhatsApp</span>
-                    <span className="text-sm text-black/60">Acces rapide et suivi direct</span>
-                  </span>
-                </span>
-                <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" aria-hidden="true" />
-              </a>
-              <a
-                href={telegramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex min-h-16 items-center justify-between rounded-3xl border border-white/12 bg-black/38 p-4 text-white transition hover:-translate-y-1 hover:border-ciza-gold/60 sm:p-5"
-              >
-                <span className="flex items-center gap-4">
-                  <Globe2 className="h-7 w-7 text-ciza-gold" aria-hidden="true" />
-                  <span>
-                    <span className="block font-display text-xl font-bold">Telegram</span>
-                    <span className="text-sm text-white/52">Canal annonces et ressources</span>
-                  </span>
-                </span>
-                <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" aria-hidden="true" />
-              </a>
+              <PrimaryButton href={whatsappUrl}>
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                WhatsApp
+              </PrimaryButton>
+              <SecondaryButton href={telegramUrl}>
+                <Globe2 className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
+                Telegram
+              </SecondaryButton>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-4">
-          {[
-            ["Capital protege", "Priorite a la securite wallet, aux process et a la prevention.", LockKeyhole],
-            ["Vision long terme", "Des plans d'accumulation et de sortie plutot que du bruit.", TrendingUp],
-            ["Reseau africain", "Une communaute adaptee aux moyens de paiement et usages locaux.", UsersRound],
-            ["Execution premium", "Design, support, contenus et experience dignes d'une fintech globale.", Gem]
-          ].map(([title, text, Icon]) => (
-            <div key={title} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-              <Icon className="mb-5 h-8 w-8 text-ciza-gold" aria-hidden="true" />
-              <h3 className="font-display text-xl font-semibold text-white">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-white/56">{text}</p>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -610,13 +582,13 @@ export default function HomePage() {
         <div className="mx-auto max-w-4xl">
           <SectionHeader
             eyebrow="FAQ"
-            title="Les questions avant de rejoindre."
-            text="Une marque financiere inspire confiance quand elle est claire sur ce qu'elle fait, et sur ce qu'elle ne promet pas."
+            title="Clair, responsable, sans promesse magique."
+            text="Une marque financiere premium inspire confiance quand elle dit clairement ce qu'elle fait et ce qu'elle ne fait pas."
           />
           <div className="mt-10 space-y-3 sm:mt-12 sm:space-y-4">
             {faqs.map((item) => (
               <details key={item.q} className="group rounded-3xl border border-white/10 bg-ciza-graphite p-5 sm:p-6">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-base font-semibold text-white sm:text-lg">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-base font-black text-white sm:text-lg">
                   {item.q}
                   <ChevronDown className="h-5 w-5 shrink-0 text-ciza-gold transition group-open:rotate-180" aria-hidden="true" />
                 </summary>
@@ -628,31 +600,21 @@ export default function HomePage() {
       </section>
 
       <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 26 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.65, ease: "easeOut" }}
-          className="mx-auto max-w-7xl rounded-[1.5rem] border border-ciza-gold/26 bg-[radial-gradient(circle_at_18%_12%,rgba(244,197,66,.24),transparent_24rem),linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02))] p-5 text-center shadow-gold sm:rounded-[2rem] sm:p-7 md:p-12"
-        >
+        <motion.div initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.65, ease: "easeOut" }} className="mx-auto max-w-7xl rounded-[1.5rem] border border-ciza-gold/26 bg-[radial-gradient(circle_at_18%_12%,rgba(244,197,66,.22),transparent_24rem),linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02))] p-5 text-center shadow-gold sm:rounded-[2rem] sm:p-7 md:p-12">
           <p className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-2xl bg-ciza-gold text-black">
             <Zap className="h-7 w-7" aria-hidden="true" />
           </p>
-          <h2 className="mx-auto max-w-4xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
-            Construis ta discipline crypto avec une communaute serieuse.
+          <h2 className="mx-auto max-w-4xl font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+            Construis ta discipline crypto avec une experience premium.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
             Rejoins CizaOnline et avance avec methode, prudence et accompagnement.
           </p>
-          <div className="mx-auto mt-8 grid max-w-3xl gap-3 sm:mt-9 sm:grid-cols-3 sm:gap-4">
-            <PrimaryButton href={whatsappUrl}>WhatsApp</PrimaryButton>
+          <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:mt-9 sm:flex-row sm:justify-center sm:gap-4">
+            <PrimaryButton href={paymentUrl}>Rejoindre pour 6$/mois</PrimaryButton>
             <SecondaryButton href={telegramUrl}>
-              <Globe2 className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
-              Telegram
-            </SecondaryButton>
-            <SecondaryButton href={paymentUrl}>
-              <Coins className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
-              Paiement / Acces
+              <Orbit className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
+              Voir le canal
             </SecondaryButton>
           </div>
         </motion.div>
@@ -661,21 +623,15 @@ export default function HomePage() {
       <footer className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
           <div>
-            <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-ciza-gold text-lg font-black text-black">
-                C
-              </span>
-              <span className="font-display text-xl font-bold text-white">CizaOnline</span>
-            </div>
+            <LogoMark />
             <p className="mt-5 max-w-md leading-7 text-white/52">
-              Startup crypto education premium pour une Afrique plus informee, plus protegee et
-              plus ambitieuse dans l'economie digitale.
+              Plateforme crypto education premium pour une Afrique plus informee, plus protegee et plus ambitieuse dans l'economie digitale.
             </p>
           </div>
           <div>
             <p className="font-semibold text-white">Produit</p>
             <div className="mt-4 grid gap-3 text-sm text-white/52">
-              <a href="#pourquoi" className="hover:text-ciza-gold">Pourquoi</a>
+              <a href="#terminal" className="hover:text-ciza-gold">Terminal</a>
               <a href="#offre" className="hover:text-ciza-gold">Offre</a>
               <a href="#inscription" className="hover:text-ciza-gold">Inscription</a>
             </div>
@@ -683,14 +639,17 @@ export default function HomePage() {
           <div>
             <p className="font-semibold text-white">Confiance</p>
             <div className="mt-4 grid gap-3 text-sm text-white/52">
-              <span className="inline-flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-ciza-gold" /> Education responsable</span>
-              <span className="inline-flex items-center gap-2"><WalletCards className="h-4 w-4 text-ciza-gold" /> Mobile money ready</span>
-              <span className="inline-flex items-center gap-2"><Coins className="h-4 w-4 text-ciza-gold" /> Stablecoin literacy</span>
+              {trustBadges.map(([label, Icon]) => (
+                <span key={label} className="inline-flex items-center gap-2">
+                  <Icon className="h-4 w-4 text-ciza-gold" />
+                  {label}
+                </span>
+              ))}
             </div>
           </div>
         </div>
         <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-4 border-t border-white/8 pt-6 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 CizaOnline. Tous droits reserves.</p>
+          <p>(c) 2026 CizaOnline. Tous droits reserves.</p>
           <p>Education crypto. Pas de conseil financier individualise.</p>
         </div>
       </footer>
