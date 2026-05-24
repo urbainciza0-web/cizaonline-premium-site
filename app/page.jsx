@@ -47,6 +47,7 @@ const stagger = {
 
 const navItems = [
   { label: "Terminal", href: "#terminal" },
+  { label: "À propos", href: "#apropos" },
   { label: "Offre", href: "#offre" },
   { label: "Confiance", href: "#confiance" },
   { label: "FAQ", href: "#faq" }
@@ -87,25 +88,39 @@ const offerItems = [
 
 const testimonials = [
   {
-    initials: "DK",
-    name: "David K.",
-    place: "Kinshasa",
-    text: "J'ai enfin compris comment acheter sans paniquer, securiser mon wallet et attendre mes niveaux.",
-    result: "Routine d'investissement claire"
+    avatar: "/images/testimonial-1.png",
+    name: "Patrick M.",
+    place: "Kinshasa, RDC",
+    text: "Grâce à CizaOnline, j’ai compris comment m’inscrire, sécuriser mon compte et commencer à utiliser Binance facilement.",
+    result: "Compte sécurisé"
   },
   {
-    initials: "MA",
+    avatar: "/images/testimonial-2.png",
     name: "Merveille A.",
-    place: "Lubumbashi",
-    text: "Le groupe est calme, structure et professionnel. On apprend a reflechir avant de cliquer.",
-    result: "Wallet securise en 7 jours"
+    place: "Lubumbashi, RDC",
+    text: "Le groupe est calme, structuré et professionnel. J’ai appris à réfléchir avant d’acheter et à protéger mon capital.",
+    result: "Meilleure discipline"
   },
   {
-    initials: "EL",
-    name: "Eli L.",
-    place: "Abidjan",
-    text: "CizaOnline ressemble plus a un desk prive qu'a un groupe crypto. C'est exactement ce qu'il me fallait.",
+    avatar: "/images/testimonial-3.png",
+    name: "Eric L.",
+    place: "Abidjan, Côte d’Ivoire",
+    text: "CizaOnline ressemble plus à un desk privé qu’à un groupe crypto bruyant. Les analyses sont simples et applicables.",
     result: "Plan de risque applique"
+  },
+  {
+    avatar: "/images/testimonial-4.png",
+    name: "Junior B.",
+    place: "Goma, RDC",
+    text: "Avant, je suivais les signaux au hasard. Maintenant je comprends mieux USDT, wallet, risque et timing d’entrée.",
+    result: "Décisions plus calmes"
+  },
+  {
+    avatar: "/images/testimonial-5.png",
+    name: "Ariane N.",
+    place: "Kigali, Rwanda",
+    text: "Les checklists m’ont aidée à éviter les erreurs de débutant et à avancer étape par étape sans pression.",
+    result: "Parcours plus clair"
   }
 ];
 
@@ -213,12 +228,12 @@ function HeroBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       <Image
-        src="/images/ciza-hero.png"
-        alt="CizaOnline crypto premium"
+        src="/images/hero-cizaonline.png"
+        alt="Ambassadrice CizaOnline utilisant son smartphone"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[64%_center] opacity-36 sm:opacity-46"
+        className="object-cover object-[58%_center] opacity-38 sm:object-[68%_center] sm:opacity-48"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(244,197,66,.22),transparent_24rem),linear-gradient(90deg,#030303_0%,rgba(3,3,3,.92)_32%,rgba(3,3,3,.68)_62%,rgba(3,3,3,.42)_100%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,3,.72)_0%,rgba(3,3,3,.18)_42%,#050505_100%)]" />
@@ -318,21 +333,6 @@ function MarketTerminal() {
         ))}
       </div>
     </motion.div>
-  );
-}
-
-function Avatar({ initials, index }) {
-  const gradients = [
-    "from-ciza-gold/90 via-white/80 to-ciza-emerald/70",
-    "from-ciza-emerald/75 via-ciza-gold/80 to-white/70",
-    "from-white/80 via-ciza-gold/75 to-ciza-goldDeep/80"
-  ];
-  return (
-    <span className={`grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${gradients[index % gradients.length]} p-px shadow-gold`}>
-      <span className="grid h-full w-full place-items-center rounded-2xl bg-black font-display font-black text-ciza-gold">
-        {initials}
-      </span>
-    </span>
   );
 }
 
@@ -446,6 +446,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section id="apropos" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+          >
+            <motion.p variants={fadeUp} className="font-display text-xs font-black uppercase tracking-[0.24em] text-ciza-gold">
+              À propos
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="mt-4 font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+              Une marque crypto africaine visuelle, claire et rassurante.
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
+              CizaOnline associe l’image premium d’une fintech moderne à une pédagogie simple:
+              apprendre Binance, USDT, la sécurité wallet et la discipline d’investissement sans surcharge.
+            </motion.p>
+            <motion.div variants={fadeUp} className="mt-7 grid gap-3 sm:grid-cols-2">
+              {["Mobile first", "Business crypto", "Support humain", "Méthode claire"].map((item) => (
+                <span key={item} className="rounded-2xl border border-ciza-gold/16 bg-white/[0.035] px-4 py-3 text-sm font-bold text-white/70">
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+            className="gold-border glass overflow-hidden rounded-[1.5rem] p-2 shadow-gold sm:rounded-[2rem]"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] sm:aspect-[16/11] sm:rounded-[1.65rem]">
+              <Image
+                src="/images/cizaonline-app.png"
+                alt="Ambassadrice CizaOnline travaillant sur ordinateur"
+                fill
+                sizes="(min-width: 1024px) 48vw, 100vw"
+                className="object-cover object-center transition duration-500 hover:scale-[1.025]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/58 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/10 bg-black/48 p-4 backdrop-blur-xl">
+                <p className="font-display text-xl font-black text-white">CizaOnline Academy</p>
+                <p className="mt-1 text-sm leading-6 text-white/62">Formation, communauté et confiance digitale.</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       <section id="confiance" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
@@ -453,6 +504,33 @@ export default function HomePage() {
             title="Une experience qui ressemble a une fintech mondiale."
             text="Le site met en avant un cadre serieux: terminal visuel, signaux educatifs, protection du capital et communaute structuree."
           />
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+            className="mt-10 grid gap-5 rounded-[1.5rem] border border-ciza-gold/18 bg-white/[0.025] p-4 shadow-panel sm:rounded-[2rem] sm:p-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] sm:aspect-[16/10] lg:aspect-[4/5]">
+              <Image
+                src="/images/cizaonline-business.png"
+                alt="Ambassadrice CizaOnline en tenue business"
+                fill
+                sizes="(min-width: 1024px) 38vw, 100vw"
+                className="object-cover object-center transition duration-500 hover:scale-[1.025]"
+              />
+            </div>
+            <div className="p-1 sm:p-4">
+              <p className="font-display text-xs font-black uppercase tracking-[0.24em] text-ciza-gold">Avantages premium</p>
+              <h3 className="mt-4 font-display text-2xl font-black leading-tight text-white sm:text-4xl">
+                Une expérience rassurante pour apprendre, comparer et passer à l’action.
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-white/62 sm:text-base">
+                Les visuels CizaOnline renforcent la confiance sans remplacer le fond: sécurité, méthode,
+                pédagogie, communauté et usage mobile au quotidien.
+              </p>
+            </div>
+          </motion.div>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="mt-10 grid gap-4 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
             {advantages.map(([title, text, Icon]) => (
               <motion.article key={title} variants={fadeUp} className="gold-border glass feature-card rounded-3xl p-5 sm:p-7">
@@ -528,21 +606,37 @@ export default function HomePage() {
       <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Social proof"
-            title="Des retours realistes, plus proches d'un desk que d'un groupe bruyant."
-            text="Les membres parlent de clarte, de securite et de discipline. C'est la base d'une marque crypto durable."
+            eyebrow="Témoignages"
+            title="Des retours crédibles avec des profils professionnels."
+            text="Les membres parlent de clarté, de sécurité, d’inscription, de Binance et de discipline. C’est la base d’une marque crypto durable."
           />
-          <div className="mt-10 grid gap-4 sm:mt-14 lg:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:mt-14 md:grid-cols-2 xl:grid-cols-5">
             {testimonials.map((item, index) => (
-              <motion.article key={item.name} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: index * 0.08 }} className="testimonial-card rounded-3xl border border-ciza-gold/18 bg-ciza-graphite p-5 shadow-panel sm:p-7">
+              <motion.article
+                key={item.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.55, delay: index * 0.06 }}
+                className="testimonial-card rounded-3xl border border-ciza-gold/18 bg-ciza-graphite p-5 shadow-panel transition-colors hover:border-ciza-gold/40 hover:bg-white/[0.045] sm:p-6"
+              >
                 <div className="mb-6 flex items-center gap-4">
-                  <Avatar initials={item.initials} index={index} />
+                  <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-ciza-gold/45 bg-ciza-gold/10 shadow-gold">
+                    <Image
+                      src={item.avatar}
+                      alt={`Photo de profil de ${item.name}`}
+                      fill
+                      sizes="64px"
+                      className="object-cover"
+                    />
+                  </span>
                   <div>
                     <p className="font-semibold text-white">{item.name}</p>
                     <p className="text-sm text-white/46">{item.place}</p>
                   </div>
                 </div>
-                <p className="leading-8 text-white/72">"{item.text}"</p>
+                <p className="text-sm leading-7 text-white/72">"{item.text}"</p>
                 <p className="mt-6 inline-flex rounded-full bg-ciza-gold/12 px-3 py-1 text-xs font-black text-ciza-gold">
                   {item.result}
                 </p>
@@ -600,22 +694,34 @@ export default function HomePage() {
       </section>
 
       <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.65, ease: "easeOut" }} className="mx-auto max-w-7xl rounded-[1.5rem] border border-ciza-gold/26 bg-[radial-gradient(circle_at_18%_12%,rgba(244,197,66,.22),transparent_24rem),linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02))] p-5 text-center shadow-gold sm:rounded-[2rem] sm:p-7 md:p-12">
-          <p className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-2xl bg-ciza-gold text-black">
-            <Zap className="h-7 w-7" aria-hidden="true" />
-          </p>
-          <h2 className="mx-auto max-w-4xl font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
-            Construis ta discipline crypto avec une experience premium.
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-            Rejoins CizaOnline et avance avec methode, prudence et accompagnement.
-          </p>
-          <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:mt-9 sm:flex-row sm:justify-center sm:gap-4">
-            <PrimaryButton href={paymentUrl}>Rejoindre pour 6$/mois</PrimaryButton>
-            <SecondaryButton href={telegramUrl}>
-              <Orbit className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
-              Voir le canal
-            </SecondaryButton>
+        <motion.div initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.65, ease: "easeOut" }} className="mx-auto grid max-w-7xl gap-8 rounded-[1.5rem] border border-ciza-gold/26 bg-[radial-gradient(circle_at_18%_12%,rgba(244,197,66,.22),transparent_24rem),linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02))] p-5 shadow-gold sm:rounded-[2rem] sm:p-7 md:p-12 lg:grid-cols-[1fr_.72fr] lg:items-center">
+          <div className="text-center lg:text-left">
+            <p className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-2xl bg-ciza-gold text-black lg:mx-0">
+              <Zap className="h-7 w-7" aria-hidden="true" />
+            </p>
+            <h2 className="mx-auto max-w-4xl font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl lg:mx-0">
+              Construis ta discipline crypto avec une experience premium.
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg sm:leading-8 lg:mx-0">
+              Rejoins CizaOnline et avance avec methode, prudence et accompagnement.
+            </p>
+            <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-4 lg:mx-0">
+              <PrimaryButton href={paymentUrl}>Rejoindre pour 6$/mois</PrimaryButton>
+              <SecondaryButton href={telegramUrl}>
+                <Orbit className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
+                Voir le canal
+              </SecondaryButton>
+            </div>
+          </div>
+          <div className="relative min-h-[18rem] overflow-hidden rounded-[1.25rem] border border-ciza-gold/18 shadow-panel sm:min-h-[24rem] sm:rounded-[1.65rem]">
+            <Image
+              src="/images/hero-cizaonline.png"
+              alt="Ambassadrice CizaOnline avec application mobile"
+              fill
+              sizes="(min-width: 1024px) 34vw, 100vw"
+              className="object-cover object-center transition duration-500 hover:scale-[1.025]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/52 via-transparent to-transparent" />
           </div>
         </motion.div>
       </section>
