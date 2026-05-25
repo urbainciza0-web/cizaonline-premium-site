@@ -792,7 +792,7 @@ export default function HomePage() {
       </section>
 
       <footer className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-[1.2fr_.75fr_.85fr_.95fr]">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-[1.12fr_.7fr_.78fr_1.12fr]">
           <div>
             <LogoMark />
             <p className="mt-5 max-w-md leading-7 text-white/52">
@@ -818,16 +818,38 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div>
-            <p className="font-semibold text-white">Contact</p>
-            <div className="mt-4 grid gap-3 text-sm text-white/52">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-ciza-gold">
-                <MessageCircle className="h-4 w-4 shrink-0 text-ciza-gold" aria-hidden="true" />
-                <span>{contactPhone}</span>
+          <div className="rounded-3xl border border-ciza-gold/18 bg-white/[0.035] p-5 shadow-panel">
+            <p className="font-display text-xs font-black uppercase tracking-[0.24em] text-ciza-gold">Contact</p>
+            <div className="mt-5 grid gap-3">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 rounded-2xl border border-ciza-gold/18 bg-black/30 p-3.5 transition hover:border-ciza-gold/50 hover:bg-ciza-gold/10"
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-ciza-gold text-black shadow-gold">
+                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-xs font-black uppercase tracking-[0.16em] text-white/46">WhatsApp</span>
+                  <span className="mt-1 block break-words text-sm font-black text-white transition group-hover:text-ciza-gold">
+                    {contactPhone}
+                  </span>
+                </span>
               </a>
-              <a href={emailUrl} className="inline-flex items-center gap-2 break-all hover:text-ciza-gold">
-                <Mail className="h-4 w-4 shrink-0 text-ciza-gold" aria-hidden="true" />
-                <span>{contactEmail}</span>
+              <a
+                href={emailUrl}
+                className="group flex items-center gap-3 rounded-2xl border border-ciza-gold/18 bg-black/30 p-3.5 transition hover:border-ciza-gold/50 hover:bg-ciza-gold/10"
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-ciza-gold/28 bg-white text-black shadow-panel">
+                  <Mail className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-xs font-black uppercase tracking-[0.16em] text-white/46">Email</span>
+                  <span className="mt-1 block break-all text-sm font-black text-white transition group-hover:text-ciza-gold">
+                    {contactEmail}
+                  </span>
+                </span>
               </a>
             </div>
           </div>
