@@ -17,9 +17,11 @@ import {
   Gem,
   Globe2,
   LockKeyhole,
+  Mail,
   Menu,
   MessageCircle,
   Orbit,
+  PhoneCall,
   Radar,
   ShieldCheck,
   Sparkles,
@@ -31,7 +33,10 @@ import {
   Zap
 } from "lucide-react";
 
-const whatsappUrl = "https://wa.me/message/TARGCCHEL2B5K1";
+const whatsappUrl = "https://wa.me/243834783307";
+const emailUrl = "mailto:contact@cizaonline.com";
+const contactPhone = "+243834783307";
+const contactEmail = "contact@cizaonline.com";
 const telegramUrl = "https://t.me/+qWeBitmp1OcxMjI0";
 const paymentUrl = "https://cizaonline.live/inscription";
 
@@ -50,6 +55,7 @@ const navItems = [
   { label: "À propos", href: "#apropos" },
   { label: "Offre", href: "#offre" },
   { label: "Confiance", href: "#confiance" },
+  { label: "Contact", href: "#contact" },
   { label: "FAQ", href: "#faq" }
 ];
 
@@ -672,6 +678,65 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section id="contact" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+          >
+            <motion.p variants={fadeUp} className="font-display text-xs font-black uppercase tracking-[0.24em] text-ciza-gold">
+              Contact direct
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="mt-4 font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+              Besoin d'aide ? Contactez CizaOnline
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
+              Une question sur l'inscription, le paiement, l'acces au groupe ou les ressources premium ? L'equipe CizaOnline te repond directement.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+            className="gold-border glass grid gap-4 rounded-[1.5rem] p-5 shadow-gold sm:rounded-[2rem] sm:p-7 md:grid-cols-2"
+          >
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-3xl border border-ciza-gold/18 bg-black/24 p-5 transition hover:border-ciza-gold/45 hover:bg-ciza-gold/10 sm:p-6"
+            >
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-ciza-gold text-black shadow-gold">
+                <PhoneCall className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-ciza-gold">Telephone / WhatsApp</p>
+              <p className="mt-2 break-words font-display text-2xl font-black text-white transition group-hover:text-ciza-gold">
+                {contactPhone}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-white/56">Ouvrir WhatsApp pour parler a l'equipe.</p>
+            </a>
+
+            <a
+              href={emailUrl}
+              className="group rounded-3xl border border-ciza-gold/18 bg-black/24 p-5 transition hover:border-ciza-gold/45 hover:bg-ciza-gold/10 sm:p-6"
+            >
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-black shadow-panel">
+                <Mail className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-ciza-gold">E-mail</p>
+              <p className="mt-2 break-words font-display text-2xl font-black text-white transition group-hover:text-ciza-gold">
+                {contactEmail}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-white/56">Envoyer un message a l'adresse officielle.</p>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       <section id="faq" className="bg-white/[0.025] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <SectionHeader
@@ -727,7 +792,7 @@ export default function HomePage() {
       </section>
 
       <footer className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-[1.2fr_.75fr_.85fr_.95fr]">
           <div>
             <LogoMark />
             <p className="mt-5 max-w-md leading-7 text-white/52">
@@ -751,6 +816,19 @@ export default function HomePage() {
                   {label}
                 </span>
               ))}
+            </div>
+          </div>
+          <div>
+            <p className="font-semibold text-white">Contact</p>
+            <div className="mt-4 grid gap-3 text-sm text-white/52">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-ciza-gold">
+                <MessageCircle className="h-4 w-4 shrink-0 text-ciza-gold" aria-hidden="true" />
+                <span>{contactPhone}</span>
+              </a>
+              <a href={emailUrl} className="inline-flex items-center gap-2 break-all hover:text-ciza-gold">
+                <Mail className="h-4 w-4 shrink-0 text-ciza-gold" aria-hidden="true" />
+                <span>{contactEmail}</span>
+              </a>
             </div>
           </div>
         </div>
