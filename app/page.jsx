@@ -39,6 +39,9 @@ const contactPhone = "+243834783307";
 const contactEmail = "contact@cizaonline.com";
 const telegramUrl = "https://t.me/+qWeBitmp1OcxMjI0";
 const paymentUrl = "https://cizaonline.live/inscription";
+const binanceAcademyUrl = "https://www.binance.com/fr/academy";
+const appointmentUrl =
+  "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20r%C3%A9server%20la%20formation%20crypto%20%C3%A0%2050%24";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -54,6 +57,7 @@ const navItems = [
   { label: "Terminal", href: "#terminal" },
   { label: "À propos", href: "#apropos" },
   { label: "Offre", href: "#offre" },
+  { label: "Tarifs", href: "#tarifs" },
   { label: "Confiance", href: "#confiance" },
   { label: "Contact", href: "#contact" },
   { label: "FAQ", href: "#faq" }
@@ -90,6 +94,29 @@ const offerItems = [
   ["Checklists wallet, achat, vente, risque", CheckCircle2],
   ["Lives et analyses hebdomadaires", BarChart3],
   ["Ressources PDF premium", FileText]
+];
+
+const pricingPlans = [
+  {
+    title: "Découverte crypto gratuite",
+    price: "0$",
+    description:
+      "Accès aux ressources gratuites de Binance Academy pour apprendre les bases de la crypto, blockchain, sécurité et Web3.",
+    button: "Commencer gratuitement",
+    href: binanceAcademyUrl,
+    Icon: BookOpenCheck,
+    badge: "Ressources gratuites"
+  },
+  {
+    title: "Formation crypto sur rendez-vous",
+    price: "50$",
+    description:
+      "Session personnalisée avec CizaOnline pour comprendre Binance, acheter/vendre via mobile money, sécurité crypto, P2P, wallet et bases du trading.",
+    button: "Réserver un rendez-vous",
+    href: appointmentUrl,
+    Icon: Crown,
+    badge: "Accompagnement privé"
+  }
 ];
 
 const testimonials = [
@@ -606,6 +633,72 @@ export default function HomePage() {
               ))}
             </div>
           </motion.aside>
+        </div>
+      </section>
+
+      <section id="tarifs" className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="absolute inset-x-0 top-0 h-px bg-gold-line" />
+        <div className="mx-auto max-w-7xl">
+          <SectionHeader
+            eyebrow="Tarification"
+            title="Deux chemins simples pour apprendre la crypto."
+            text="Commence avec les ressources gratuites, ou reserve un accompagnement personnalise avec CizaOnline pour passer plus vite de la theorie a la pratique."
+          />
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="mt-10 grid gap-5 sm:mt-14 lg:grid-cols-2"
+          >
+            {pricingPlans.map(({ title, price, description, button, href, Icon, badge }, index) => (
+              <motion.article
+                key={title}
+                variants={fadeUp}
+                className={`gold-border glass pricing-card rounded-[1.5rem] p-5 shadow-gold sm:rounded-[2rem] sm:p-7 ${
+                  index === 1 ? "border-ciza-gold/40" : "border-white/10"
+                }`}
+              >
+                <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p className="inline-flex items-center gap-2 rounded-full border border-ciza-gold/22 bg-ciza-gold/10 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-ciza-gold">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                      {badge}
+                    </p>
+                    <h2 className="mt-5 font-display text-2xl font-black leading-tight text-white sm:text-3xl">
+                      {title}
+                    </h2>
+                  </div>
+                  <p className="font-display text-5xl font-black text-white sm:text-6xl">{price}</p>
+                </div>
+
+                <p className="mt-5 min-h-[5.5rem] text-sm leading-7 text-white/68 sm:text-base">
+                  {description}
+                </p>
+
+                <div className="mt-7">
+                  {index === 0 ? (
+                    <SecondaryButton href={href}>
+                      <BookOpenCheck className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
+                      {button}
+                    </SecondaryButton>
+                  ) : (
+                    <PrimaryButton href={href}>{button}</PrimaryButton>
+                  )}
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+
+          <div className="mt-8 grid gap-3 rounded-[1.25rem] border border-white/10 bg-black/28 p-4 text-sm leading-6 text-white/56 shadow-panel sm:rounded-[1.5rem] sm:p-5 md:grid-cols-2">
+            <p>
+              CizaOnline n’est pas affilié officiellement à Binance. Binance Academy est une ressource éducative gratuite proposée par Binance.
+            </p>
+            <p>
+              Education crypto uniquement. Pas de conseil financier individualisé.
+            </p>
+          </div>
         </div>
       </section>
 
