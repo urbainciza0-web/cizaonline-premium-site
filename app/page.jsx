@@ -38,7 +38,8 @@ const emailUrl = "mailto:contact@cizaonline.com";
 const contactPhone = "+243834783307";
 const contactEmail = "contact@cizaonline.com";
 const telegramUrl = "https://t.me/+qWeBitmp1OcxMjI0";
-const paymentUrl = "https://cizaonline.live/inscription";
+const paymentUrl =
+  "https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=fr&ref=GRO_28502_48A90&utm_source=referral_entrance";
 const binanceAcademyUrl = "https://www.binance.com/fr/academy";
 const appointmentUrl =
   "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20r%C3%A9server%20la%20formation%20crypto%20%C3%A0%2050%24";
