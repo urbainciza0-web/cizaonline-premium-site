@@ -279,7 +279,7 @@ function HeroBackground() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[58%_center] opacity-38 sm:object-[68%_center] sm:opacity-48"
+        className="object-contain object-center opacity-42 sm:object-[center_top] sm:opacity-52 lg:object-[72%_top]"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(244,197,66,.22),transparent_24rem),linear-gradient(90deg,#030303_0%,rgba(3,3,3,.92)_32%,rgba(3,3,3,.68)_62%,rgba(3,3,3,.42)_100%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,3,.72)_0%,rgba(3,3,3,.18)_42%,#050505_100%)]" />
@@ -525,13 +525,13 @@ export default function HomePage() {
             transition={{ duration: 0.65, ease: "easeOut" }}
             className="gold-border glass overflow-hidden rounded-[1.5rem] p-2 shadow-gold sm:rounded-[2rem]"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] sm:aspect-[16/11] sm:rounded-[1.65rem]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-[radial-gradient(circle_at_50%_18%,rgba(244,197,66,.16),transparent_18rem),#050505] sm:aspect-[16/11] sm:rounded-[1.65rem]">
               <Image
                 src="/images/cizaonline-app.png"
                 alt="Ambassadrice CizaOnline travaillant sur ordinateur"
                 fill
                 sizes="(min-width: 1024px) 48vw, 100vw"
-                className="object-cover object-center transition duration-500 hover:scale-[1.025]"
+                className="object-contain object-center transition duration-500 lg:object-[center_top]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/58 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/10 bg-black/48 p-4 backdrop-blur-xl">
@@ -557,13 +557,13 @@ export default function HomePage() {
             transition={{ duration: 0.65, ease: "easeOut" }}
             className="mt-10 grid gap-5 rounded-[1.5rem] border border-ciza-gold/18 bg-white/[0.025] p-4 shadow-panel sm:rounded-[2rem] sm:p-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] sm:aspect-[16/10] lg:aspect-[4/5]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-[radial-gradient(circle_at_50%_18%,rgba(244,197,66,.16),transparent_18rem),#050505] sm:aspect-[16/10] lg:aspect-[4/5]">
               <Image
                 src="/images/cizaonline-business.png"
                 alt="Ambassadrice CizaOnline en tenue business"
                 fill
                 sizes="(min-width: 1024px) 38vw, 100vw"
-                className="object-cover object-center transition duration-500 hover:scale-[1.025]"
+                className="object-contain object-center transition duration-500 lg:object-[center_top]"
               />
             </div>
             <div className="p-1 sm:p-4">
@@ -742,7 +742,7 @@ export default function HomePage() {
                       alt={`Photo de profil de ${item.name}`}
                       fill
                       sizes="64px"
-                      className="object-cover"
+                      className="object-cover object-center"
                     />
                   </span>
                   <div>
@@ -886,13 +886,13 @@ export default function HomePage() {
               </SecondaryButton>
             </div>
           </div>
-          <div className="relative min-h-[18rem] overflow-hidden rounded-[1.25rem] border border-ciza-gold/18 shadow-panel sm:min-h-[24rem] sm:rounded-[1.65rem]">
+          <div className="relative min-h-[18rem] overflow-hidden rounded-[1.25rem] border border-ciza-gold/18 bg-[radial-gradient(circle_at_50%_18%,rgba(244,197,66,.16),transparent_18rem),#050505] shadow-panel sm:min-h-[24rem] sm:rounded-[1.65rem]">
             <Image
               src="/images/hero-cizaonline.png"
               alt="Ambassadrice CizaOnline avec application mobile"
               fill
               sizes="(min-width: 1024px) 34vw, 100vw"
-              className="object-cover object-center transition duration-500 hover:scale-[1.025]"
+              className="object-contain object-center transition duration-500 lg:object-[center_top]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/52 via-transparent to-transparent" />
           </div>
