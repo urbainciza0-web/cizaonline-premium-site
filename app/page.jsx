@@ -42,6 +42,8 @@ const paymentUrl = "https://cizaonline.live/inscription";
 const binanceAcademyUrl = "https://www.binance.com/fr/academy";
 const appointmentUrl =
   "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20r%C3%A9server%20la%20formation%20crypto%20%C3%A0%2050%24";
+const enterpriseUrl =
+  "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20un%20accompagnement%20entreprise%20%C3%A0%201000%24";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -116,6 +118,16 @@ const pricingPlans = [
     href: appointmentUrl,
     Icon: Crown,
     badge: "Accompagnement privé"
+  },
+  {
+    title: "Accompagnement Entreprise",
+    price: "1000$",
+    description:
+      "Accompagnement premium destiné aux entreprises, organisations, équipes et projets qui veulent comprendre, intégrer ou former leur personnel sur l’écosystème crypto, Binance, stablecoins, sécurité, paiements numériques, P2P et Web3.",
+    button: "Demander un accompagnement entreprise",
+    href: enterpriseUrl,
+    Icon: Gem,
+    badge: "Entreprise"
   }
 ];
 
@@ -641,8 +653,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Tarification"
-            title="Deux chemins simples pour apprendre la crypto."
-            text="Commence avec les ressources gratuites, ou reserve un accompagnement personnalise avec CizaOnline pour passer plus vite de la theorie a la pratique."
+            title="Trois chemins simples pour apprendre et intégrer la crypto."
+            text="Commence avec les ressources gratuites, reserve un accompagnement personnalise, ou structure une formation premium pour ton entreprise."
           />
 
           <motion.div
@@ -650,14 +662,14 @@ export default function HomePage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
-            className="mt-10 grid gap-5 sm:mt-14 lg:grid-cols-2"
+            className="mt-10 grid gap-5 sm:mt-14 lg:grid-cols-3"
           >
             {pricingPlans.map(({ title, price, description, button, href, Icon, badge }, index) => (
               <motion.article
                 key={title}
                 variants={fadeUp}
                 className={`gold-border glass pricing-card rounded-[1.5rem] p-5 shadow-gold sm:rounded-[2rem] sm:p-7 ${
-                  index === 1 ? "border-ciza-gold/40" : "border-white/10"
+                  index === 2 ? "border-ciza-gold/55 bg-ciza-gold/5" : index === 1 ? "border-ciza-gold/40" : "border-white/10"
                 }`}
               >
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
