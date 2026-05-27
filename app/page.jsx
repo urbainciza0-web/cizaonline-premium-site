@@ -544,7 +544,7 @@ export default function HomePage() {
       </section>
 
       <section id="confiance" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto w-full max-w-7xl overflow-hidden">
           <SectionHeader
             eyebrow="Identite CizaOnline"
             title="Une experience qui ressemble a une fintech mondiale."
@@ -663,30 +663,32 @@ export default function HomePage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
-            className="mt-10 grid gap-5 sm:mt-14 lg:grid-cols-3"
+            className="mx-auto mt-10 grid w-full max-w-[72rem] grid-cols-1 gap-5 sm:mt-14 md:grid-cols-2 xl:grid-cols-3"
           >
             {pricingPlans.map(({ title, price, description, button, href, Icon, badge }, index) => (
               <motion.article
                 key={title}
                 variants={fadeUp}
-                className={`gold-border glass pricing-card rounded-[1.5rem] p-5 shadow-gold sm:rounded-[2rem] sm:p-7 ${
+                className={`gold-border glass pricing-card min-w-0 rounded-[1.5rem] p-5 shadow-gold sm:rounded-[2rem] sm:p-6 xl:p-6 ${
                   index === 2 ? "border-ciza-gold/55 bg-ciza-gold/5" : index === 1 ? "border-ciza-gold/40" : "border-white/10"
                 }`}
               >
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
+                <div className="flex min-w-0 flex-col gap-5 sm:flex-row sm:items-start sm:justify-between xl:flex-col">
+                  <div className="min-w-0">
                     <p className="inline-flex items-center gap-2 rounded-full border border-ciza-gold/22 bg-ciza-gold/10 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-ciza-gold">
                       <Icon className="h-4 w-4" aria-hidden="true" />
                       {badge}
                     </p>
-                    <h2 className="mt-5 font-display text-2xl font-black leading-tight text-white sm:text-3xl">
+                    <h2 className="mt-5 font-display text-2xl font-black leading-tight text-white sm:text-3xl xl:text-[1.65rem]">
                       {title}
                     </h2>
                   </div>
-                  <p className="font-display text-5xl font-black text-white sm:text-6xl">{price}</p>
+                  <p className={`shrink-0 break-words font-display font-black leading-none text-white ${index === 2 ? "text-4xl sm:text-5xl xl:text-[3.15rem]" : "text-5xl sm:text-6xl xl:text-[3.35rem]"}`}>
+                    {price}
+                  </p>
                 </div>
 
-                <p className="mt-5 min-h-[5.5rem] text-sm leading-7 text-white/68 sm:text-base">
+                <p className="mt-5 text-sm leading-7 text-white/68 sm:text-base xl:min-h-[10.5rem]">
                   {description}
                 </p>
 
