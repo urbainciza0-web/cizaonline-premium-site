@@ -279,7 +279,7 @@ function HeroBackground() {
         fill
         priority
         sizes="100vw"
-        className="object-contain object-center opacity-42 sm:object-[center_top] sm:opacity-52 lg:object-[72%_top]"
+        className="object-contain object-center p-5 opacity-36 sm:p-8 sm:opacity-48 lg:object-[72%_center] lg:p-0"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(244,197,66,.22),transparent_24rem),linear-gradient(90deg,#030303_0%,rgba(3,3,3,.92)_32%,rgba(3,3,3,.68)_62%,rgba(3,3,3,.42)_100%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,3,.72)_0%,rgba(3,3,3,.18)_42%,#050505_100%)]" />
@@ -386,7 +386,7 @@ export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <main className="min-h-screen overflow-x-clip bg-ciza-black text-ciza-ivory">
+    <main className="min-h-screen max-w-[100vw] overflow-x-hidden bg-ciza-black text-ciza-ivory">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-black/62 backdrop-blur-2xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3.5 sm:px-6 lg:px-8">
           <a href="#" aria-label="CizaOnline accueil">
@@ -428,25 +428,25 @@ export default function HomePage() {
         ) : null}
       </header>
 
-      <section className="relative flex min-h-[92vh] items-center pt-24 sm:pt-28 lg:min-h-[820px] xl:min-h-[900px]">
+      <section className="relative flex min-h-[92vh] max-w-[100vw] items-center overflow-x-clip pt-24 sm:pt-28 lg:min-h-[820px] xl:min-h-[900px]">
         <HeroBackground />
-        <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 pb-14 pt-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,.9fr)] lg:items-center lg:px-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(22rem,.95fr)]">
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-3xl">
-            <motion.div variants={fadeUp} className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-ciza-gold/30 bg-ciza-gold/10 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.14em] text-ciza-gold sm:px-4 sm:text-xs sm:tracking-[0.18em]">
+        <div className="relative mx-auto grid w-full max-w-[100vw] gap-9 px-5 pb-14 pt-8 sm:max-w-7xl sm:gap-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,.9fr)] lg:items-center lg:px-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(22rem,.95fr)]">
+          <motion.div initial="hidden" animate="show" variants={stagger} className="w-full max-w-full min-w-0 sm:max-w-3xl">
+            <motion.div variants={fadeUp} className="mb-5 grid max-w-full min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-2 rounded-2xl border border-ciza-gold/30 bg-ciza-gold/10 px-2 py-2 text-[0.58rem] font-black uppercase leading-4 tracking-[0.04em] text-ciza-gold min-[375px]:text-[0.62rem] sm:inline-flex sm:flex-nowrap sm:items-center sm:rounded-full sm:px-4 sm:text-xs sm:leading-5 sm:tracking-[0.18em]">
               <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
-              <span className="truncate sm:whitespace-normal">Plateforme crypto premium pour l'Afrique francophone</span>
+              <span className="min-w-0 max-w-full whitespace-normal break-words [overflow-wrap:anywhere]">Plateforme crypto premium pour l'Afrique francophone</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="max-w-4xl text-balance break-words font-display text-[2.45rem] font-black leading-[1.04] text-white min-[380px]:text-5xl sm:text-6xl lg:text-6xl 2xl:text-7xl">
+            <motion.h1 variants={fadeUp} className="max-w-full text-balance break-words font-display text-[clamp(1.65rem,8.4vw,2.2rem)] font-black leading-[1.08] text-white [overflow-wrap:anywhere] min-[390px]:text-[clamp(1.85rem,8vw,2.35rem)] sm:max-w-4xl sm:text-[clamp(3rem,7vw,3.75rem)] sm:leading-[1.05] lg:text-[clamp(3.35rem,5.2vw,4.5rem)]">
               Formation crypto premium en Afrique francophone pour apprendre, sécuriser et{" "}
-              <span className="gold-text inline-block">investir avec discipline.</span>
+              <span className="gold-text inline break-words [overflow-wrap:anywhere]">investir avec discipline.</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-7 text-white/74 sm:text-lg sm:leading-8">
+            <motion.p variants={fadeUp} className="mt-5 max-w-full break-words text-[0.95rem] leading-7 text-white/74 [overflow-wrap:anywhere] sm:mt-6 sm:max-w-2xl sm:text-lg sm:leading-8">
               CizaOnline transforme l'apprentissage crypto en expérience premium: formation Binance, communauté,
               alertes éducatives, dashboard marché et support direct pour progresser sans bruit.
             </motion.p>
-            <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-2">
+            <motion.div variants={fadeUp} className="mt-7 grid max-w-full grid-cols-1 gap-2 overflow-x-clip min-[390px]:flex min-[390px]:flex-wrap">
               {trustBadges.map(([label, Icon]) => (
-                <span key={label} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-bold text-white/70 backdrop-blur-xl">
+                <span key={label} className="inline-flex w-full max-w-full min-w-0 items-center gap-2 whitespace-normal rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-bold text-white/70 backdrop-blur-xl min-[390px]:w-auto sm:rounded-full">
                   <Icon className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
                   {label}
                 </span>
