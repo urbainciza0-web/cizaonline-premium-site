@@ -16,6 +16,7 @@ const seoNavigationLinks = [
   { label: "Market Pulse", href: "/actualites-bitcoin" },
   { label: "Premium 6$", href: "/espace-premium" },
   { label: "Comparatif", href: "/comparatif-crypto-rdc" },
+  { label: "Témoignages", href: "/temoignages" },
   { label: "FAQ", href: "/faq-cizaonline" }
 ];
 
