@@ -7,6 +7,14 @@ const seoDescription =
   "CizaOnline accompagne les débutants, investisseurs et entreprises d'Afrique francophone avec des formations crypto, Binance, USDT, wallets, P2P et sécurité Web3.";
 const ogImage = "/images/ciza-hero.png";
 
+const seoNavigationLinks = [
+  { label: "Bitcoin RDC", href: "/acheter-bitcoin-rdc" },
+  { label: "USDT Mobile Money", href: "/acheter-usdt-mobile-money" },
+  { label: "Binance RDC", href: "/guide-binance-rdc" },
+  { label: "Formation Crypto", href: "/formation-crypto-afrique-francophone" },
+  { label: "FAQ", href: "/faq-cizaonline" }
+];
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -145,6 +153,25 @@ export const viewport = {
   themeColor: "#050505"
 };
 
+function SeoNavigation() {
+  return (
+    <nav
+      aria-label="Navigation SEO CizaOnline"
+      className="fixed inset-x-2 bottom-3 z-40 mx-auto flex max-w-5xl gap-2 overflow-x-auto rounded-2xl border border-ciza-gold/18 bg-black/76 p-2 text-xs font-black text-white/72 shadow-panel backdrop-blur-2xl sm:bottom-4 sm:rounded-full sm:px-3"
+    >
+      {seoNavigationLinks.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          className="shrink-0 rounded-full border border-white/8 bg-white/[0.045] px-3 py-2 transition hover:border-ciza-gold/45 hover:bg-ciza-gold/10 hover:text-ciza-gold"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
@@ -158,6 +185,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
         />
         <div className="noise-layer" />
+        <SeoNavigation />
         {children}
       </body>
     </html>
