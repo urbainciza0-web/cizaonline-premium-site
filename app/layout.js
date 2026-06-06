@@ -12,6 +12,11 @@ const seoNavigationLinks = [
   { label: "USDT Mobile Money", href: "/acheter-usdt-mobile-money" },
   { label: "Binance RDC", href: "/guide-binance-rdc" },
   { label: "Formation Crypto", href: "/formation-crypto-afrique-francophone" },
+  { label: "Blog", href: "/blog" },
+  { label: "Market Pulse", href: "/actualites-bitcoin" },
+  { label: "Premium 6$", href: "/espace-premium" },
+  { label: "Comparatif", href: "/comparatif-crypto-rdc" },
+  { label: "Témoignages", href: "/temoignages" },
   { label: "FAQ", href: "/faq-cizaonline" }
 ];
 
@@ -94,7 +99,11 @@ export const metadata = {
     "wallet crypto",
     "P2P Binance",
     "sécurité crypto",
-    "accompagnement crypto entreprise"
+    "accompagnement crypto entreprise",
+    "blog crypto RDC",
+    "Bitcoin Kinshasa",
+    "crypto Goma",
+    "crypto Lubumbashi"
   ],
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
@@ -157,7 +166,7 @@ function SeoNavigation() {
   return (
     <nav
       aria-label="Navigation SEO CizaOnline"
-      className="fixed inset-x-2 bottom-3 z-40 mx-auto flex max-w-5xl gap-2 overflow-x-auto rounded-2xl border border-ciza-gold/18 bg-black/76 p-2 text-xs font-black text-white/72 shadow-panel backdrop-blur-2xl sm:bottom-4 sm:rounded-full sm:px-3"
+      className="fixed inset-x-2 bottom-3 z-40 mx-auto flex max-w-6xl gap-2 overflow-x-auto rounded-2xl border border-ciza-gold/18 bg-black/76 p-2 text-xs font-black text-white/72 shadow-panel backdrop-blur-2xl sm:bottom-4 sm:rounded-full sm:px-3"
     >
       {seoNavigationLinks.map((link) => (
         <a
@@ -169,6 +178,21 @@ function SeoNavigation() {
         </a>
       ))}
     </nav>
+  );
+}
+
+function FloatingWhatsApp() {
+  return (
+    <a
+      href="https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20des%20informations%20sur%20la%20formation%20crypto."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contacter CizaOnline sur WhatsApp"
+      className="fixed bottom-20 right-3 z-50 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ciza-gold/30 bg-ciza-gold px-4 py-3 text-xs font-black text-black shadow-gold transition hover:brightness-110 sm:bottom-24 sm:right-5 sm:px-5 sm:text-sm"
+    >
+      <span className="text-lg leading-none">WA</span>
+      <span className="hidden sm:inline">WhatsApp</span>
+    </a>
   );
 }
 
@@ -185,6 +209,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
         />
         <div className="noise-layer" />
+        <FloatingWhatsApp />
         <SeoNavigation />
         {children}
       </body>
