@@ -9,6 +9,10 @@ const seoLinks = [
   ["Acheter USDT Mobile Money", "/acheter-usdt-mobile-money"],
   ["Guide Binance RDC", "/guide-binance-rdc"],
   ["Formation Crypto Afrique", "/formation-crypto-afrique-francophone"],
+  ["Blog Crypto RDC", "/blog"],
+  ["Actualites Bitcoin", "/actualites-bitcoin"],
+  ["Espace Premium", "/espace-premium"],
+  ["Comparatif crypto RDC", "/comparatif-crypto-rdc"],
   ["FAQ CizaOnline", "/faq-cizaonline"]
 ];
 
