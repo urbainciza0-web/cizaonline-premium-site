@@ -196,7 +196,7 @@ function FloatingWhatsApp() {
   return (
     <div className="fixed bottom-24 right-3 z-50 flex items-end gap-3 sm:bottom-28 sm:right-5">
       <span className="pointer-events-none relative hidden rounded-2xl border border-ciza-gold/20 bg-black/85 px-4 py-2 text-xs font-black text-white shadow-panel backdrop-blur-xl after:absolute after:right-[-6px] after:top-1/2 after:h-3 after:w-3 after:-translate-y-1/2 after:rotate-45 after:border-r after:border-t after:border-ciza-gold/20 after:bg-black/85 min-[380px]:block">
-        Besoin d'aide ?
+        Besoin d&apos;aide ?
       </span>
       <a
         href="https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20des%20informations%20sur%20la%20formation%20crypto."
