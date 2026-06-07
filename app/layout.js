@@ -181,40 +181,6 @@ function SeoNavigation() {
   );
 }
 
-function WhatsAppIcon() {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-6 w-6 sm:h-7 sm:w-7">
-      <path
-        fill="currentColor"
-        d="M16.04 3.2A12.74 12.74 0 0 0 5.23 22.68L3.6 28.8l6.27-1.64A12.72 12.72 0 1 0 16.04 3.2Zm0 2.55a10.17 10.17 0 0 1 8.69 15.47 10.18 10.18 0 0 1-12.98 3.55l-.45-.22-3.73.98.99-3.64-.24-.47A10.18 10.18 0 0 1 16.04 5.75Zm-4.28 4.65c-.22-.49-.45-.5-.66-.51h-.56c-.2 0-.52.08-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.07 3.3 5.11 4.49 2.53.99 3.04.79 3.59.74.55-.05 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.07-.13-.27-.2-.57-.35-.3-.15-1.78-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.91-2.18Z"
-      />
-    </svg>
-  );
-}
-
-function FloatingWhatsApp() {
-  return (
-    <div className="group fixed bottom-20 right-3 z-50 flex items-end gap-2 sm:bottom-24 sm:right-5">
-      <span className="pointer-events-none relative hidden rounded-xl border border-ciza-gold/20 bg-black/85 px-3 py-1.5 text-[0.68rem] font-black text-white opacity-0 shadow-panel backdrop-blur-xl transition duration-200 ease-out after:absolute after:right-[-5px] after:top-1/2 after:h-2.5 after:w-2.5 after:-translate-y-1/2 after:rotate-45 after:border-r after:border-t after:border-ciza-gold/20 after:bg-black/85 group-hover:translate-x-0 group-hover:opacity-100 sm:block">
-        Besoin d&apos;aide ?
-      </span>
-      <a
-        href="https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20des%20informations%20sur%20la%20formation%20crypto."
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Ouvrir WhatsApp Business CizaOnline"
-        className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full border border-white/20 bg-[#25D366] text-white shadow-[0_10px_28px_rgba(0,0,0,0.3)] transition duration-300 ease-out hover:-translate-y-0.5 hover:scale-105 hover:shadow-[0_14px_34px_rgba(37,211,102,0.24)] focus:outline-none focus:ring-2 focus:ring-ciza-gold/70 focus:ring-offset-2 focus:ring-offset-ciza-black sm:h-14 sm:w-14"
-      >
-        <span className="absolute inset-0 rounded-full bg-[#25D366]" />
-        <span className="absolute inset-[-3px] rounded-full border border-ciza-gold/20 opacity-55 transition duration-300 group-hover:opacity-90" />
-        <span className="relative grid h-9 w-9 place-items-center rounded-full bg-white/10 sm:h-10 sm:w-10">
-          <WhatsAppIcon />
-        </span>
-      </a>
-    </div>
-  );
-}
-
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
@@ -228,7 +194,6 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
         />
         <div className="noise-layer" />
-        <FloatingWhatsApp />
         <SeoNavigation />
         {children}
       </body>
