@@ -18,6 +18,27 @@ const testimonials = [
   ["Ariane N.", "Afrique francophone", "CizaOnline donne un cadre clair pour apprendre sans pression ni promesse rapide."]
 ];
 
+const videos = [
+  {
+    title: "Video YouTube principale",
+    location: "CizaOnline",
+    description: "Retour video principal sur l'accompagnement crypto CizaOnline.",
+    href: "https://youtu.be/ZUWc_ZYOkBo?si=UT-zUHqs7DmAqvDG"
+  },
+  {
+    title: "Short video Kinshasa",
+    location: "Kinshasa",
+    description: "Format court pour decouvrir l'experience CizaOnline a Kinshasa.",
+    href: "https://youtube.com/shorts/BO3deHAg8SU?si=8Oyw3BbjRZAeET7Z"
+  },
+  {
+    title: "Short video Goma / Lubumbashi",
+    location: "Goma et Lubumbashi",
+    description: "Temoignage court pour les apprenants de l'Est et du Sud de la RDC.",
+    href: "https://youtu.be/JqrRMI7EHw4?si=IcKIdhupXRyhqfzW"
+  }
+];
+
 export default function TemoignagesPage() {
   return (
     <main className="min-h-screen bg-ciza-black px-4 pb-20 pt-28 text-ciza-ivory sm:px-6 lg:px-8">
@@ -37,14 +58,29 @@ export default function TemoignagesPage() {
         ))}
       </section>
       <section className="mx-auto mt-14 grid max-w-7xl gap-5 lg:grid-cols-3">
-        {["Video YouTube principale", "Short video Kinshasa", "Short video Goma / Lubumbashi"].map((label) => (
-          <div key={label} className="grid min-h-64 place-items-center rounded-[1.5rem] border border-ciza-gold/18 bg-[radial-gradient(circle_at_50%_18%,rgba(244,197,66,.16),transparent_18rem),#0f1013] p-6 text-center shadow-panel">
-            <div>
-              <span className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-ciza-gold/30 bg-ciza-gold/10 text-ciza-gold"><Play className="h-8 w-8" /></span>
-              <h2 className="mt-5 font-display text-2xl font-black text-white">{label}</h2>
-              <p className="mt-3 text-sm leading-7 text-white/56">Emplacement prevu pour embed YouTube, temoignage court ou video verticale.</p>
+        {videos.map((video) => (
+          <a
+            key={video.title}
+            href={video.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Voir la video ${video.title}`}
+            className="group grid min-h-64 place-items-center rounded-[1.5rem] border border-ciza-gold/18 bg-[radial-gradient(circle_at_50%_18%,rgba(244,197,66,.16),transparent_18rem),#0f1013] p-6 text-center shadow-panel transition duration-300 hover:-translate-y-1 hover:border-ciza-gold/45 hover:shadow-[0_24px_70px_rgba(0,0,0,.42)] focus:outline-none focus:ring-2 focus:ring-ciza-gold/70 focus:ring-offset-2 focus:ring-offset-ciza-black"
+          >
+            <div className="flex h-full w-full flex-col items-center justify-center">
+              <span className="relative mx-auto grid h-16 w-16 place-items-center rounded-full border border-ciza-gold/30 bg-ciza-gold/10 text-ciza-gold transition duration-300 group-hover:scale-105 group-hover:bg-ciza-gold group-hover:text-black">
+                <span className="absolute -right-1 -top-1 rounded-full bg-[#FF0000] px-2 py-0.5 text-[0.6rem] font-black uppercase tracking-[0.12em] text-white">YT</span>
+                <Play className="h-8 w-8 fill-current" />
+              </span>
+              <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-ciza-gold/80">{video.location}</p>
+              <h2 className="mt-3 font-display text-2xl font-black text-white">{video.title}</h2>
+              <p className="mt-3 max-w-sm text-sm leading-7 text-white/60">{video.description}</p>
+              <span className="mt-6 inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full border border-ciza-gold/35 px-5 py-3 text-sm font-black text-ciza-gold transition duration-300 group-hover:border-ciza-gold group-hover:bg-ciza-gold group-hover:text-black">
+                <Play className="h-4 w-4 fill-current" />
+                Voir la vid&eacute;o
+              </span>
             </div>
-          </div>
+          </a>
         ))}
       </section>
       <section className="mx-auto mt-14 flex max-w-7xl flex-col gap-3 rounded-[1.5rem] border border-ciza-gold/20 bg-white/[0.035] p-6 sm:flex-row sm:items-center sm:justify-between">
