@@ -15,21 +15,6 @@ const nextConfig = {
         ]
       }
     ];
-  },
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "www.cizaonline.com"
-          }
-        ],
-        destination: "https://cizaonline.com/:path*",
-        permanent: true
-      }
-    ];
   }
 };
 
