@@ -17,7 +17,16 @@ const seoNavigationLinks = [
   { label: "Premium 6$", href: "/espace-premium" },
   { label: "Comparatif", href: "/comparatif-crypto-rdc" },
   { label: "Témoignages", href: "/temoignages" },
-  { label: "FAQ", href: "/faq-cizaonline" }
+  { label: "FAQ", href: "/faq-cizaonline" },
+  { label: "Confidentialité", href: "/politique-de-confidentialite" },
+  { label: "Conditions", href: "/conditions-utilisation" },
+  { label: "Mentions", href: "/mentions-legales" }
+];
+
+const legalLinks = [
+  { label: "Politique de confidentialite", href: "/politique-de-confidentialite" },
+  { label: "Conditions d'utilisation", href: "/conditions-utilisation" },
+  { label: "Mentions legales", href: "/mentions-legales" }
 ];
 
 const organizationSchema = {
@@ -181,6 +190,28 @@ function SeoNavigation() {
   );
 }
 
+function LegalFooter() {
+  return (
+    <footer className="border-t border-ciza-gold/14 bg-ciza-black px-4 pb-28 pt-8 text-ciza-ivory sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-5 rounded-[1.25rem] border border-ciza-gold/16 bg-white/[0.025] p-5 shadow-panel sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-display text-lg font-black text-white">CizaOnline legal</p>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-white/52">
+            Contenu educatif crypto pour l&apos;Afrique francophone. Pas de conseil financier personnalise.
+          </p>
+        </div>
+        <nav aria-label="Liens legaux CizaOnline" className="flex flex-col gap-2 text-sm font-bold text-white/58 sm:flex-row sm:flex-wrap sm:justify-end">
+          {legalLinks.map((link) => (
+            <a key={link.href} href={link.href} className="rounded-full border border-ciza-gold/18 px-4 py-2 transition hover:border-ciza-gold/50 hover:text-ciza-gold">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </footer>
+  );
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
@@ -196,6 +227,7 @@ export default function RootLayout({ children }) {
         <div className="noise-layer" />
         <SeoNavigation />
         {children}
+        <LegalFooter />
       </body>
     </html>
   );
