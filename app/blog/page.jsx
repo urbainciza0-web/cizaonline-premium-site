@@ -1,10 +1,29 @@
 import Link from "next/link";
-import { ArrowRight, Mail, MessageCircle, ShieldCheck, TrendingUp } from "lucide-react";
+import { ArrowRight, MessageCircle, ShieldCheck, TrendingUp } from "lucide-react";
+import LeadCaptureForm from "../components/LeadCaptureForm";
 
 const siteUrl = "https://cizaonline.com";
 const whatsappUrl = "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20recevoir%20les%20guides%20crypto%20RDC.";
 
 const articles = [
+  {
+    title: "Comment acheter du Bitcoin en RDC ?",
+    href: "/blog/comment-acheter-bitcoin-rdc",
+    description: "Methode simple pour comprendre Bitcoin, choisir un canal d'achat, verifier les frais et securiser sa premiere operation.",
+    tag: "Bitcoin RDC"
+  },
+  {
+    title: "Binance P2P explique simplement",
+    href: "/blog/binance-p2p-explique-simplement",
+    description: "Explication claire du P2P Binance, des annonces, des vendeurs, des preuves Mobile Money et des erreurs a eviter.",
+    tag: "Binance P2P"
+  },
+  {
+    title: "Les erreurs a eviter quand on debute en crypto",
+    href: "/blog/erreurs-debutant-crypto",
+    description: "Checklist debutant pour eviter faux supports, mauvais reseaux, securite faible et promesses de gains rapides.",
+    tag: "Securite"
+  },
   {
     title: "Comment debuter avec Binance en RDC",
     href: "/blog/debuter-binance-rdc",
@@ -47,24 +66,18 @@ export default function BlogPage() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,.72fr)] lg:items-center">
           <div>
             <p className="inline-flex rounded-full border border-ciza-gold/25 bg-ciza-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-ciza-gold">Blog Crypto RDC</p>
-            <h1 className="mt-6 text-balance font-display text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">Guides crypto pour Kinshasa, Goma, Lubumbashi et l'Afrique francophone.</h1>
+            <h1 className="mt-6 text-balance font-display text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">Guides crypto pour Kinshasa, Goma, Lubumbashi et l&apos;Afrique francophone.</h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/70">Articles pedagogiques CizaOnline pour comprendre Binance, USDT, Mobile Money, securite wallet et investissement responsable sans promesse financiere.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="premium-button inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-black text-black"><MessageCircle className="h-4 w-4" />WhatsApp</a>
               <Link href="/#inscription" className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full border border-ciza-gold/25 bg-white/[0.055] px-6 py-3 text-sm font-bold text-white hover:bg-ciza-gold/10">Inscription CizaOnline<ArrowRight className="h-4 w-4 text-ciza-gold" /></Link>
             </div>
           </div>
-          <form action="mailto:contact@cizaonline.com" method="post" encType="text/plain" className="gold-border glass rounded-[1.5rem] p-5 shadow-gold sm:rounded-[2rem] sm:p-7">
-            <Mail className="h-8 w-8 text-ciza-gold" />
-            <h2 className="mt-4 font-display text-2xl font-black text-white">Recevoir les guides premium</h2>
-            <p className="mt-3 text-sm leading-7 text-white/62">Laisse tes coordonnees pour recevoir les prochains guides CizaOnline.</p>
-            <div className="mt-6 grid gap-3">
-              <input name="nom" required placeholder="Nom" className="min-h-12 rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none focus:border-ciza-gold" />
-              <input name="email" type="email" required placeholder="Email" className="min-h-12 rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none focus:border-ciza-gold" />
-              <input name="whatsapp" required placeholder="WhatsApp" className="min-h-12 rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none focus:border-ciza-gold" />
-              <button type="submit" className="premium-button min-h-12 rounded-full px-5 text-sm font-black text-black">Envoyer</button>
-            </div>
-          </form>
+          <LeadCaptureForm
+            source="blog"
+            title="Recevoir les guides premium"
+            description="Laisse tes coordonnees pour recevoir les prochains guides CizaOnline et choisir le sujet qui t'interesse."
+          />
         </div>
       </section>
 
