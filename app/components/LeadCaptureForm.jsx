@@ -36,7 +36,7 @@ export default function LeadCaptureForm({ title = "Recevoir un accompagnement Ci
       interest: formData.get("interet")?.toString() || "",
       message: formData.get("message")?.toString().trim() || "",
       company: formData.get("company")?.toString().trim() || "",
-      source,
+      source: source === "Chatbot" ? "Chatbot" : "Formulaire",
       submittedAfterMs: Date.now() - startedAt
     };
 

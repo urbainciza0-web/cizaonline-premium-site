@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { saveProspect } from "../../lib/prospectsStore";
 
 const MAX_MESSAGE_LENGTH = 1200;
 const MAX_FIELD_LENGTH = 180;
@@ -31,29 +32,6 @@ function isRateLimited(ip) {
   return hits.length > RATE_LIMIT_MAX;
 }
 
-async function sendToWebhook(prospect) {
-  const webhookUrl = process.env.CIZA_PROSPECT_WEBHOOK_URL;
-
-  if (!webhookUrl) {
-    globalThis.cizaProspectRequests = globalThis.cizaProspectRequests || [];
-    globalThis.cizaProspectRequests.push(prospect);
-    globalThis.cizaProspectRequests = globalThis.cizaProspectRequests.slice(-200);
-    return { mode: "memory" };
-  }
-
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(prospect)
-  });
-
-  if (!response.ok) {
-    throw new Error(`Prospect webhook failed with status ${response.status}`);
-  }
-
-  return { mode: "webhook" };
-}
-
 export async function POST(request) {
   try {
     const ip = getClientIp(request);
@@ -80,7 +58,7 @@ export async function POST(request) {
       whatsapp: cleanText(payload.whatsapp),
       interest: cleanText(payload.interest),
       message: cleanText(payload.message, MAX_MESSAGE_LENGTH),
-      source: cleanText(payload.source || "site"),
+      source: cleanText(payload.source || "Formulaire"),
       submittedAt: new Date().toISOString()
     };
 
@@ -96,7 +74,7 @@ export async function POST(request) {
       message: prospect.message
     });
 
-    const delivery = await sendToWebhook(prospect);
+    const delivery = await saveProspect(prospect);
 
     console.log("Prospect API stored", {
       mode: delivery.mode,
