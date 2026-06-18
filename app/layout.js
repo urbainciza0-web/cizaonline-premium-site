@@ -1,4 +1,5 @@
 import "./globals.css";
+import CizaChatbot from "./components/CizaChatbot";
 
 const siteUrl = "https://cizaonline.com";
 const siteName = "CizaOnline";
@@ -228,6 +229,7 @@ export default function RootLayout({ children }) {
         <SeoNavigation />
         {children}
         <LegalFooter />
+        <CizaChatbot />
       </body>
     </html>
   );

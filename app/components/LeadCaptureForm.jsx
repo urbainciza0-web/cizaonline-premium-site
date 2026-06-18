@@ -12,25 +12,46 @@ const interestOptions = [
 
 export default function LeadCaptureForm({ title = "Recevoir un accompagnement CizaOnline", description, source = "site", className = "" }) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [startedAt] = useState(() => Date.now());
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setError("");
+    setSubmitting(true);
+
     const formData = new FormData(event.currentTarget);
-    const prospect = {
+    const payload = {
       name: formData.get("nom")?.toString().trim() || "",
       whatsapp: formData.get("whatsapp")?.toString().trim() || "",
       email: formData.get("email")?.toString().trim() || "",
       interest: formData.get("interet")?.toString() || "",
+      message: formData.get("message")?.toString().trim() || "",
+      company: formData.get("company")?.toString().trim() || "",
       source,
-      createdAt: new Date().toISOString(),
-      status: "pending"
+      submittedAfterMs: Date.now() - startedAt
     };
 
-    const storageKey = "cizaonline_prospect_requests";
-    const existing = JSON.parse(window.localStorage.getItem(storageKey) || "[]");
-    window.localStorage.setItem(storageKey, JSON.stringify([...existing, prospect]));
-    event.currentTarget.reset();
-    setSubmitted(true);
+    try {
+      const response = await fetch("/api/prospects", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "La demande n'a pas pu etre envoyee.");
+      }
+
+      event.currentTarget.reset();
+      setSubmitted(true);
+    } catch (submitError) {
+      setError(submitError.message);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -41,6 +62,7 @@ export default function LeadCaptureForm({ title = "Recevoir un accompagnement Ci
         {description || "Laisse tes coordonnees et le sujet qui t'interesse. L'equipe CizaOnline reviendra vers toi rapidement."}
       </p>
       <div className="mt-6 grid gap-3">
+        <input name="company" tabIndex="-1" autoComplete="off" className="hidden" aria-hidden="true" />
         <input name="nom" required placeholder="Nom" className="min-h-12 rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none transition placeholder:text-white/36 focus:border-ciza-gold" />
         <input name="whatsapp" required placeholder="Numero WhatsApp" className="min-h-12 rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none transition placeholder:text-white/36 focus:border-ciza-gold" />
         <input name="email" type="email" required placeholder="Email" className="min-h-12 rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none transition placeholder:text-white/36 focus:border-ciza-gold" />
@@ -52,13 +74,19 @@ export default function LeadCaptureForm({ title = "Recevoir un accompagnement Ci
             </option>
           ))}
         </select>
-        <button type="submit" className="premium-button min-h-12 rounded-full px-5 text-sm font-black text-black">
-          Envoyer ma demande
+        <textarea name="message" rows="4" placeholder="Message" className="min-h-28 resize-none rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-white/36 focus:border-ciza-gold" />
+        <button type="submit" disabled={submitting} className="premium-button min-h-12 rounded-full px-5 text-sm font-black text-black disabled:cursor-wait disabled:opacity-70">
+          {submitting ? "Envoi en cours..." : "Envoyer ma demande"}
         </button>
       </div>
       {submitted ? (
         <p className="mt-4 rounded-2xl border border-ciza-emerald/30 bg-ciza-emerald/10 p-4 text-sm font-bold leading-6 text-ciza-emerald">
-          Merci, votre demande a bien ete recue. L&apos;equipe CizaOnline vous contactera rapidement.
+          Merci, votre demande a bien été reçue. L’équipe CizaOnline vous contactera rapidement sur WhatsApp ou par email.
+        </p>
+      ) : null}
+      {error ? (
+        <p className="mt-4 rounded-2xl border border-red-400/30 bg-red-400/10 p-4 text-sm font-bold leading-6 text-red-200">
+          {error}
         </p>
       ) : null}
     </form>
