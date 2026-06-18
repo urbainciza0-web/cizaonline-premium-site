@@ -88,7 +88,21 @@ export async function POST(request) {
       return NextResponse.json({ error: "Veuillez completer les champs obligatoires." }, { status: 400 });
     }
 
-    await sendToWebhook(prospect);
+    console.log("Prospect API received", {
+      name: prospect.name,
+      whatsapp: prospect.whatsapp,
+      email: prospect.email,
+      interest: prospect.interest,
+      message: prospect.message
+    });
+
+    const delivery = await sendToWebhook(prospect);
+
+    console.log("Prospect API stored", {
+      mode: delivery.mode,
+      source: prospect.source,
+      submittedAt: prospect.submittedAt
+    });
 
     return NextResponse.json({ ok: true });
   } catch (error) {
