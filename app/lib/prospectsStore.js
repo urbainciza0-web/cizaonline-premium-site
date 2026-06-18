@@ -1,63 +1,30 @@
-import crypto from "crypto";
+const FORM_COLUMNS = ["Date", "Nom", "Email", "WhatsApp", "Source", "Sujet", "Message"];
 
-const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
-const GOOGLE_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
-const DEFAULT_SHEET_NAME = "Prospects";
-const SHEET_COLUMNS = ["Date", "Nom", "Email", "WhatsApp", "Source", "Sujet", "Message"];
-
-function getSheetConfig() {
+function getGoogleFormConfig() {
   return {
-    spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-    clientEmail: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-    privateKey: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    sheetName: process.env.GOOGLE_SHEETS_PROSPECTS_SHEET_NAME || DEFAULT_SHEET_NAME
+    actionUrl: process.env.GOOGLE_FORM_ACTION_URL,
+    fields: {
+      name: process.env.GOOGLE_FORM_ENTRY_NOM,
+      whatsapp: process.env.GOOGLE_FORM_ENTRY_WHATSAPP,
+      email: process.env.GOOGLE_FORM_ENTRY_EMAIL,
+      interest: process.env.GOOGLE_FORM_ENTRY_SUJET,
+      message: process.env.GOOGLE_FORM_ENTRY_MESSAGE,
+      source: process.env.GOOGLE_FORM_ENTRY_SOURCE,
+      date: process.env.GOOGLE_FORM_ENTRY_DATE
+    }
   };
 }
 
-function hasGoogleSheetsConfig(config = getSheetConfig()) {
-  return Boolean(config.spreadsheetId && config.clientEmail && config.privateKey);
-}
-
-function toBase64Url(input) {
-  return Buffer.from(input)
-    .toString("base64")
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
-}
-
-function createJwt(config) {
-  const now = Math.floor(Date.now() / 1000);
-  const header = { alg: "RS256", typ: "JWT" };
-  const claim = {
-    iss: config.clientEmail,
-    scope: GOOGLE_SCOPE,
-    aud: GOOGLE_TOKEN_URL,
-    exp: now + 3600,
-    iat: now
-  };
-  const unsignedToken = `${toBase64Url(JSON.stringify(header))}.${toBase64Url(JSON.stringify(claim))}`;
-  const signature = crypto.createSign("RSA-SHA256").update(unsignedToken).sign(config.privateKey);
-
-  return `${unsignedToken}.${toBase64Url(signature)}`;
-}
-
-async function getGoogleAccessToken(config) {
-  const response = await fetch(GOOGLE_TOKEN_URL, {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion: createJwt(config)
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`Google token request failed with status ${response.status}`);
-  }
-
-  const data = await response.json();
-  return data.access_token;
+function hasGoogleFormConfig(config = getGoogleFormConfig()) {
+  return Boolean(
+    config.actionUrl &&
+      config.fields.name &&
+      config.fields.whatsapp &&
+      config.fields.email &&
+      config.fields.interest &&
+      config.fields.message &&
+      config.fields.source
+  );
 }
 
 function getMemoryProspects() {
@@ -65,97 +32,132 @@ function getMemoryProspects() {
   return globalThis.cizaProspectRequests;
 }
 
-function prospectToRow(prospect) {
-  return [
-    prospect.submittedAt,
-    prospect.name,
-    prospect.email,
-    prospect.whatsapp,
-    prospect.source,
-    prospect.interest,
-    prospect.message
-  ];
-}
-
-function rowToProspect(row) {
-  return {
-    submittedAt: row[0] || "",
-    name: row[1] || "",
-    email: row[2] || "",
-    whatsapp: row[3] || "",
-    source: row[4] || "",
-    interest: row[5] || "",
-    message: row[6] || ""
+async function sendToGoogleForm(prospect, config) {
+  const values = {
+    [config.fields.name]: prospect.name,
+    [config.fields.whatsapp]: prospect.whatsapp,
+    [config.fields.email]: prospect.email,
+    [config.fields.interest]: prospect.interest,
+    [config.fields.message]: prospect.message,
+    [config.fields.source]: prospect.source
   };
-}
 
-async function appendToGoogleSheets(prospect, config) {
-  const accessToken = await getGoogleAccessToken(config);
-  const range = encodeURIComponent(`${config.sheetName}!A:G`);
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
-  const response = await fetch(url, {
+  if (config.fields.date) {
+    values[config.fields.date] = prospect.submittedAt;
+  }
+
+  const formBody = new URLSearchParams(values);
+
+  const response = await fetch(config.actionUrl, {
     method: "POST",
     headers: {
-      authorization: `Bearer ${accessToken}`,
-      "content-type": "application/json"
+      "content-type": "application/x-www-form-urlencoded;charset=UTF-8"
     },
-    body: JSON.stringify({ values: [prospectToRow(prospect)] })
+    body: formBody,
+    redirect: "manual"
   });
 
-  if (!response.ok) {
-    throw new Error(`Google Sheets append failed with status ${response.status}`);
+  if (![0, 200, 302, 303].includes(response.status)) {
+    throw new Error(`Google Form submit failed with status ${response.status}`);
   }
 }
 
-async function readFromGoogleSheets(config) {
-  const accessToken = await getGoogleAccessToken(config);
-  const range = encodeURIComponent(`${config.sheetName}!A:G`);
-  const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${range}`, {
-    headers: { authorization: `Bearer ${accessToken}` },
-    cache: "no-store"
+async function sendTelegramNotification(prospect) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    return { enabled: false };
+  }
+
+  const text = [
+    "Nouveau prospect CizaOnline",
+    `Nom: ${prospect.name}`,
+    `WhatsApp: ${prospect.whatsapp}`,
+    `Email: ${prospect.email}`,
+    `Sujet: ${prospect.interest}`,
+    `Source: ${prospect.source}`,
+    `Message: ${prospect.message || "-"}`
+  ].join("\n");
+
+  const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text
+    })
   });
 
   if (!response.ok) {
-    throw new Error(`Google Sheets read failed with status ${response.status}`);
+    console.error("Telegram prospect notification failed", { status: response.status });
+    return { enabled: true, ok: false };
   }
 
-  const data = await response.json();
-  const rows = data.values || [];
-  const dataRows = rows[0]?.join("|") === SHEET_COLUMNS.join("|") ? rows.slice(1) : rows;
-
-  return dataRows.map(rowToProspect).reverse();
+  return { enabled: true, ok: true };
 }
 
-export async function saveProspect(prospect) {
-  const config = getSheetConfig();
+async function sendGmailNotification(prospect) {
+  const webhookUrl = process.env.GMAIL_PROSPECT_WEBHOOK_URL;
 
-  if (hasGoogleSheetsConfig(config)) {
-    await appendToGoogleSheets(prospect, config);
-    return { mode: "google-sheets" };
+  if (!webhookUrl) {
+    return { enabled: false };
   }
 
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(prospect)
+  });
+
+  if (!response.ok) {
+    console.error("Gmail prospect notification webhook failed", { status: response.status });
+    return { enabled: true, ok: false };
+  }
+
+  return { enabled: true, ok: true };
+}
+
+function saveToMemory(prospect) {
   const memoryProspects = getMemoryProspects();
   memoryProspects.push(prospect);
   globalThis.cizaProspectRequests = memoryProspects.slice(-200);
-  return { mode: "memory" };
+}
+
+export async function saveProspect(prospect) {
+  const config = getGoogleFormConfig();
+  let mode = "memory";
+
+  if (hasGoogleFormConfig(config)) {
+    await sendToGoogleForm(prospect, config);
+    mode = "google-forms";
+  } else {
+    console.warn("Prospect storage fallback: Google Forms is not configured. Using memory fallback.", {
+      hasActionUrl: Boolean(config.actionUrl),
+      hasNameEntry: Boolean(config.fields.name),
+      hasWhatsappEntry: Boolean(config.fields.whatsapp),
+      hasEmailEntry: Boolean(config.fields.email),
+      hasInterestEntry: Boolean(config.fields.interest),
+      hasMessageEntry: Boolean(config.fields.message),
+      hasSourceEntry: Boolean(config.fields.source)
+    });
+  }
+
+  saveToMemory(prospect);
+
+  const telegram = await sendTelegramNotification(prospect);
+  const gmail = await sendGmailNotification(prospect);
+
+  return { mode, telegram, gmail };
 }
 
 export async function listProspects() {
-  const config = getSheetConfig();
-
-  if (hasGoogleSheetsConfig(config)) {
-    return {
-      mode: "google-sheets",
-      prospects: await readFromGoogleSheets(config)
-    };
-  }
-
   return {
-    mode: "memory",
+    mode: hasGoogleFormConfig() ? "google-forms + memory-cache" : "memory",
     prospects: [...getMemoryProspects()].reverse()
   };
 }
 
 export function getProspectColumns() {
-  return SHEET_COLUMNS;
+  return FORM_COLUMNS;
 }
