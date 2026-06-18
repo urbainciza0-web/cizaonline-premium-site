@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Bot, MessageCircle, Send, X } from "lucide-react";
+import { Bot, CheckCircle2, MessageCircle, Send, X } from "lucide-react";
 
 const CHATBOT_ENABLED = true;
 const whatsappUrl = "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20j%27ai%20une%20question%20et%20je%20veux%20etre%20accompagne.";
@@ -50,6 +50,11 @@ function getAnswer(question) {
 export default function CizaChatbot() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [leadOpen, setLeadOpen] = useState(false);
+  const [leadSent, setLeadSent] = useState(false);
+  const [leadError, setLeadError] = useState("");
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
+  const [startedAt] = useState(() => Date.now());
   const [messages, setMessages] = useState(defaultMessages);
   const hasHumanCue = useMemo(() => messages.some((message) => message.text.toLowerCase().includes("whatsapp")), [messages]);
 
@@ -75,6 +80,53 @@ export default function CizaChatbot() {
   function handleSubmit(event) {
     event.preventDefault();
     ask(input);
+  }
+
+  async function handleLeadSubmit(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setLeadError("");
+    setLeadSubmitting(true);
+
+    if (!form) {
+      setLeadError("Le formulaire chatbot n'est pas disponible. Veuillez reessayer.");
+      setLeadSubmitting(false);
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/prospects", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("nom")?.toString().trim() || "",
+          email: formData.get("email")?.toString().trim() || "",
+          whatsapp: formData.get("whatsapp")?.toString().trim() || "",
+          interest: "Question chatbot",
+          message: formData.get("message")?.toString().trim() || "Demande depuis le chatbot CizaOnline",
+          company: formData.get("company")?.toString().trim() || "",
+          source: "Chatbot",
+          submittedAfterMs: Date.now() - startedAt
+        })
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "La demande chatbot n'a pas pu etre envoyee.");
+      }
+
+      if (form?.reset) {
+        form.reset();
+      }
+      setLeadSent(true);
+      setLeadOpen(false);
+    } catch (error) {
+      setLeadError(error.message);
+    } finally {
+      setLeadSubmitting(false);
+    }
   }
 
   return (
@@ -118,10 +170,41 @@ export default function CizaChatbot() {
             </form>
 
             {hasHumanCue ? (
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-ciza-gold/25 px-4 py-2 text-xs font-black text-ciza-gold transition hover:bg-ciza-gold/10">
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                Continuer sur WhatsApp
-              </a>
+              <div className="mt-3 grid gap-2">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-ciza-gold/25 px-4 py-2 text-xs font-black text-ciza-gold transition hover:bg-ciza-gold/10">
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                  Continuer sur WhatsApp
+                </a>
+                <button type="button" onClick={() => setLeadOpen((current) => !current)} className="inline-flex w-full items-center justify-center rounded-full border border-white/10 px-4 py-2 text-xs font-black text-white/66 transition hover:border-ciza-gold/30 hover:text-ciza-gold">
+                  Etre rappelé
+                </button>
+              </div>
+            ) : null}
+
+            {leadOpen ? (
+              <form onSubmit={handleLeadSubmit} className="mt-3 grid gap-2 rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+                <input name="company" tabIndex="-1" autoComplete="off" className="hidden" aria-hidden="true" />
+                <input name="nom" required placeholder="Nom" className="min-h-9 rounded-full border border-white/10 bg-black/40 px-3 text-xs text-white outline-none placeholder:text-white/34 focus:border-ciza-gold" />
+                <input name="whatsapp" required placeholder="WhatsApp" className="min-h-9 rounded-full border border-white/10 bg-black/40 px-3 text-xs text-white outline-none placeholder:text-white/34 focus:border-ciza-gold" />
+                <input name="email" required type="email" placeholder="Email" className="min-h-9 rounded-full border border-white/10 bg-black/40 px-3 text-xs text-white outline-none placeholder:text-white/34 focus:border-ciza-gold" />
+                <textarea name="message" rows="2" placeholder="Message" className="min-h-16 resize-none rounded-2xl border border-white/10 bg-black/40 px-3 py-2 text-xs text-white outline-none placeholder:text-white/34 focus:border-ciza-gold" />
+                <button type="submit" disabled={leadSubmitting} className="rounded-full bg-ciza-gold px-4 py-2 text-xs font-black text-black disabled:cursor-wait disabled:opacity-70">
+                  {leadSubmitting ? "Envoi..." : "Envoyer au support"}
+                </button>
+              </form>
+            ) : null}
+
+            {leadSent ? (
+              <p className="mt-3 inline-flex items-center gap-2 rounded-2xl border border-ciza-emerald/30 bg-ciza-emerald/10 p-3 text-xs font-bold leading-5 text-ciza-emerald">
+                <CheckCircle2 className="h-4 w-4 shrink-0" />
+                Demande envoyée. L'équipe CizaOnline vous contactera prochainement.
+              </p>
+            ) : null}
+
+            {leadError ? (
+              <p className="mt-3 rounded-2xl border border-red-400/30 bg-red-400/10 p-3 text-xs font-bold leading-5 text-red-200">
+                {leadError}
+              </p>
             ) : null}
           </div>
         </section>
