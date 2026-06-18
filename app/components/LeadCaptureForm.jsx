@@ -18,10 +18,17 @@ export default function LeadCaptureForm({ title = "Recevoir un accompagnement Ci
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget;
     setError("");
     setSubmitting(true);
 
-    const formData = new FormData(event.currentTarget);
+    if (!form) {
+      setError("Le formulaire n'est pas disponible. Veuillez reessayer.");
+      setSubmitting(false);
+      return;
+    }
+
+    const formData = new FormData(form);
     const payload = {
       name: formData.get("nom")?.toString().trim() || "",
       whatsapp: formData.get("whatsapp")?.toString().trim() || "",
@@ -45,7 +52,9 @@ export default function LeadCaptureForm({ title = "Recevoir un accompagnement Ci
         throw new Error(result.error || "La demande n'a pas pu etre envoyee.");
       }
 
-      event.currentTarget.reset();
+      if (form?.reset) {
+        form.reset();
+      }
       setSubmitted(true);
     } catch (submitError) {
       setError(submitError.message);
@@ -81,7 +90,7 @@ export default function LeadCaptureForm({ title = "Recevoir un accompagnement Ci
       </div>
       {submitted ? (
         <p className="mt-4 rounded-2xl border border-ciza-emerald/30 bg-ciza-emerald/10 p-4 text-sm font-bold leading-6 text-ciza-emerald">
-          Merci, votre demande a bien été reçue. L’équipe CizaOnline vous contactera rapidement sur WhatsApp ou par email.
+          Votre demande a été envoyée avec succès. L'équipe CizaOnline vous contactera prochainement.
         </p>
       ) : null}
       {error ? (
