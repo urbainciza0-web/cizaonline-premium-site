@@ -120,7 +120,10 @@ export const metadata = {
   publisher: siteName,
   category: "Education crypto",
   alternates: {
-    canonical: "/"
+    canonical: "/",
+    types: {
+      "application/rss+xml": "/rss.xml"
+    }
   },
   icons: {
     icon: [
