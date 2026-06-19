@@ -1,3 +1,5 @@
+import { longSeoArticleSummaries, longSeoMetricoolSocialPosts } from "./longSeoArticles.js";
+
 export const siteUrl = "https://cizaonline.com";
 
 export const blogCategories = [
@@ -23,7 +25,7 @@ export const blogCategories = [
   }
 ];
 
-export const blogArticles = [
+const baseBlogArticles = [
   {
     title: "Comment acheter du Bitcoin en RDC ?",
     href: "/blog/comment-acheter-bitcoin-rdc",
@@ -125,6 +127,8 @@ export const blogArticles = [
   }
 ];
 
+export const blogArticles = [...baseBlogArticles, ...longSeoArticleSummaries];
+
 export const metricoolSocialPosts = [
   {
     articleSlug: "creer-compte-binance-rdc",
@@ -193,6 +197,8 @@ export const metricoolSocialPosts = [
   }
 ];
 
+const allMetricoolSocialPosts = [...metricoolSocialPosts, ...longSeoMetricoolSocialPosts];
+
 export function getCategoryBySlug(slug) {
   return blogCategories.find((category) => category.slug === slug);
 }
@@ -202,7 +208,7 @@ export function getArticlesByCategory(slug) {
 }
 
 export function getMetricoolSocialPosts() {
-  return metricoolSocialPosts.flatMap((item) => [
+  return allMetricoolSocialPosts.flatMap((item) => [
     {
       articleTitle: item.title,
       articleUrl: item.articleUrl,

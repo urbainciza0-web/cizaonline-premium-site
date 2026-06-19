@@ -29,6 +29,20 @@ export default function ArticleLayout({ article }) {
     },
     articleSection: article.tag
   };
+  const faqSchema = article.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: article.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer
+          }
+        }))
+      }
+    : null;
 
   return (
     <main className="min-h-screen bg-ciza-black px-4 pb-24 pt-28 text-ciza-ivory sm:px-6 lg:px-8">
@@ -36,6 +50,12 @@ export default function ArticleLayout({ article }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      {faqSchema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      ) : null}
       <article className="mx-auto max-w-4xl">
         <Link href="/blog" className="text-sm font-black text-ciza-gold">Blog CizaOnline</Link>
         <p className="mt-6 inline-flex rounded-full border border-ciza-gold/25 bg-ciza-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-ciza-gold">
@@ -66,6 +86,34 @@ export default function ArticleLayout({ article }) {
             </section>
           ))}
         </div>
+
+        {article.relatedLinks?.length ? (
+          <section className="mt-10 rounded-[1.5rem] border border-ciza-gold/16 bg-ciza-graphite p-5 sm:p-6">
+            <h2 className="font-display text-2xl font-black leading-tight text-white">Continuer avec les ressources CizaOnline</h2>
+            <div className="mt-5 grid gap-3 text-sm font-bold text-white/68 sm:grid-cols-2">
+              {article.relatedLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="inline-flex items-center gap-2 rounded-full border border-ciza-gold/16 px-4 py-2 transition hover:border-ciza-gold/50 hover:text-ciza-gold">
+                  {link.label}
+                  <ArrowRight className="h-4 w-4 text-ciza-gold" />
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {article.faq?.length ? (
+          <section className="mt-10 rounded-[1.5rem] border border-white/10 bg-white/[0.025] p-5 sm:p-6">
+            <h2 className="font-display text-2xl font-black leading-tight text-white">FAQ SEO</h2>
+            <div className="mt-5 space-y-5">
+              {article.faq.map((item) => (
+                <div key={item.question} className="border-t border-white/10 pt-5 first:border-t-0 first:pt-0">
+                  <h3 className="font-display text-xl font-black text-white">{item.question}</h3>
+                  <p className="mt-3 leading-8 text-white/68">{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <LeadCaptureForm
           source={article.slug}
