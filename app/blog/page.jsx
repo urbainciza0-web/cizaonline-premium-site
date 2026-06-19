@@ -1,48 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, MessageCircle, ShieldCheck, TrendingUp } from "lucide-react";
+import BlogSearch from "../components/BlogSearch";
 import LeadCaptureForm from "../components/LeadCaptureForm";
+import { blogArticles, blogCategories, buildBlogSchema } from "../lib/blogContent";
 
 const siteUrl = "https://cizaonline.com";
 const whatsappUrl = "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20recevoir%20les%20guides%20crypto%20RDC.";
-
-const articles = [
-  {
-    title: "Comment acheter du Bitcoin en RDC ?",
-    href: "/blog/comment-acheter-bitcoin-rdc",
-    description: "Methode simple pour comprendre Bitcoin, choisir un canal d'achat, verifier les frais et securiser sa premiere operation.",
-    tag: "Bitcoin RDC"
-  },
-  {
-    title: "Binance P2P explique simplement",
-    href: "/blog/binance-p2p-explique-simplement",
-    description: "Explication claire du P2P Binance, des annonces, des vendeurs, des preuves Mobile Money et des erreurs a eviter.",
-    tag: "Binance P2P"
-  },
-  {
-    title: "Les erreurs a eviter quand on debute en crypto",
-    href: "/blog/erreurs-debutant-crypto",
-    description: "Checklist debutant pour eviter faux supports, mauvais reseaux, securite faible et promesses de gains rapides.",
-    tag: "Securite"
-  },
-  {
-    title: "Comment debuter avec Binance en RDC",
-    href: "/blog/debuter-binance-rdc",
-    description: "Compte, securite, verification, P2P et premiers reflexes pour les debutants a Kinshasa, Goma et Lubumbashi.",
-    tag: "Binance RDC"
-  },
-  {
-    title: "Acheter USDT avec Mobile Money",
-    href: "/blog/acheter-usdt-mobile-money",
-    description: "Guide educatif pour comprendre USDT, reseaux, vendeurs P2P, preuves Mobile Money et erreurs a eviter.",
-    tag: "USDT"
-  },
-  {
-    title: "Securiser son compte crypto",
-    href: "/blog/securiser-compte-crypto",
-    description: "Checklist simple pour proteger Binance, wallets, mots de passe, 2FA, seed phrase et comptes WhatsApp/Telegram.",
-    tag: "Securite"
-  }
-];
 
 export const metadata = {
   title: "Blog Crypto RDC | Guides CizaOnline",
@@ -60,8 +23,14 @@ export const metadata = {
 };
 
 export default function BlogPage() {
+  const blogSchema = buildBlogSchema();
+
   return (
     <main className="min-h-screen bg-ciza-black px-4 pb-20 pt-28 text-ciza-ivory sm:px-6 lg:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       <section className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,.72fr)] lg:items-center">
           <div>
@@ -81,18 +50,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section className="mx-auto mt-16 max-w-7xl">
-        <div className="grid gap-5 md:grid-cols-3">
-          {articles.map((article) => (
-            <article key={article.href} className="rounded-[1.25rem] border border-ciza-gold/16 bg-ciza-graphite p-5 shadow-panel">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-ciza-gold">{article.tag}</p>
-              <h2 className="mt-4 font-display text-2xl font-black leading-tight text-white">{article.title}</h2>
-              <p className="mt-4 text-sm leading-7 text-white/64">{article.description}</p>
-              <Link href={article.href} className="mt-6 inline-flex items-center gap-2 text-sm font-black text-ciza-gold">Lire le guide <ArrowRight className="h-4 w-4" /></Link>
-            </article>
-          ))}
-        </div>
-      </section>
+      <BlogSearch articles={blogArticles} categories={blogCategories} />
 
       <section className="mx-auto mt-16 grid max-w-7xl gap-5 lg:grid-cols-2">
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6">

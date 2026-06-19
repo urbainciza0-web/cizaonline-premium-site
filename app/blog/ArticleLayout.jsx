@@ -2,11 +2,40 @@ import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LeadCaptureForm from "../components/LeadCaptureForm";
 
+const siteUrl = "https://cizaonline.com";
 const whatsappUrl = "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20viens%20du%20blog%20et%20je%20veux%20un%20accompagnement%20crypto.";
 
 export default function ArticleLayout({ article }) {
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.intro,
+    url: `${siteUrl}/${article.slug}`,
+    inLanguage: "fr",
+    author: {
+      "@type": "Organization",
+      name: "CizaOnline",
+      url: siteUrl
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "CizaOnline",
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/favicon.svg`
+      }
+    },
+    articleSection: article.tag
+  };
+
   return (
     <main className="min-h-screen bg-ciza-black px-4 pb-24 pt-28 text-ciza-ivory sm:px-6 lg:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <article className="mx-auto max-w-4xl">
         <Link href="/blog" className="text-sm font-black text-ciza-gold">Blog CizaOnline</Link>
         <p className="mt-6 inline-flex rounded-full border border-ciza-gold/25 bg-ciza-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-ciza-gold">
