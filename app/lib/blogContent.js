@@ -1,6 +1,7 @@
 import { longSeoArticleSummaries, longSeoMetricoolSocialPosts } from "./longSeoArticles.js";
 
 export const siteUrl = "https://cizaonline.com";
+export const instagramImagePath = "/blog-images/instagram-1080x1350-v2";
 
 export const blogCategories = [
   {
@@ -135,7 +136,7 @@ export function getArticleSlug(article) {
 
 export function getArticleImageUrl(articleOrSlug) {
   const slug = typeof articleOrSlug === "string" ? articleOrSlug : getArticleSlug(articleOrSlug);
-  return `${siteUrl}/blog-images/${slug}`;
+  return `${siteUrl}${instagramImagePath}/${slug}`;
 }
 
 export function getBlogArticleBySlug(slug) {

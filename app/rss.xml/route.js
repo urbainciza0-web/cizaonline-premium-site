@@ -57,7 +57,7 @@ export function GET() {
   return new Response(buildRssFeed(), {
     headers: {
       "content-type": "application/rss+xml; charset=utf-8",
-      "cache-control": "public, max-age=3600, s-maxage=3600"
+      "cache-control": "no-store, max-age=0, s-maxage=0, must-revalidate"
     }
   });
 }
