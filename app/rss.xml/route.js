@@ -1,4 +1,4 @@
-import { blogArticles, siteUrl } from "../lib/blogContent.js";
+import { blogArticles, getArticleImageUrl, siteUrl } from "../lib/blogContent.js";
 
 export const dynamic = "force-static";
 
@@ -23,6 +23,7 @@ function buildRssFeed() {
     .map((article) => {
       const url = `${siteUrl}${article.href}`;
       const categories = [article.tag, article.category, ...(article.keywords || [])];
+      const imageUrl = getArticleImageUrl(article);
 
       return `
     <item>
@@ -31,13 +32,15 @@ function buildRssFeed() {
       <guid isPermaLink="true">${escapeXml(url)}</guid>
       <description>${escapeXml(article.description)}</description>
       <pubDate>${formatRssDate(article.publishedAt)}</pubDate>
+      <enclosure url="${escapeXml(imageUrl)}" length="0" type="image/png" />
+      <media:content url="${escapeXml(imageUrl)}" medium="image" type="image/png" width="1080" height="1350" />
       ${categories.map((category) => `<category>${escapeXml(category)}</category>`).join("\n      ")}
     </item>`;
     })
     .join("");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>CizaOnline Blog Crypto RDC</title>
     <link>${siteUrl}/blog</link>

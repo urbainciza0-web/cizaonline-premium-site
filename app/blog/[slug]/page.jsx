@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import ArticleLayout from "../ArticleLayout";
+import { getArticleImageUrl } from "../../lib/blogContent.js";
 import { getLongSeoArticleBySlug, longSeoArticleSummaries } from "../../lib/longSeoArticles";
 
 export function generateStaticParams() {
@@ -16,6 +17,8 @@ export async function generateMetadata({ params }) {
     return {};
   }
 
+  const imageUrl = getArticleImageUrl(slug);
+
   return {
     title: `${article.title} | CizaOnline`,
     description: article.intro,
@@ -26,7 +29,21 @@ export async function generateMetadata({ params }) {
       description: article.intro,
       url: `https://cizaonline.com/${article.slug}`,
       type: "article",
-      locale: "fr_FR"
+      locale: "fr_FR",
+      images: [
+        {
+          url: imageUrl,
+          width: 1080,
+          height: 1350,
+          alt: article.title
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.intro,
+      images: [imageUrl]
     }
   };
 }

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LeadCaptureForm from "../components/LeadCaptureForm";
+import { getArticleImageUrl } from "../lib/blogContent.js";
 
 const siteUrl = "https://cizaonline.com";
 const whatsappUrl = "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20viens%20du%20blog%20et%20je%20veux%20un%20accompagnement%20crypto.";
 
 export default function ArticleLayout({ article }) {
+  const articleImageUrl = getArticleImageUrl(article.slug.replace("blog/", ""));
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -27,7 +29,13 @@ export default function ArticleLayout({ article }) {
         url: `${siteUrl}/favicon.svg`
       }
     },
-    articleSection: article.tag
+    articleSection: article.tag,
+    image: {
+      "@type": "ImageObject",
+      url: articleImageUrl,
+      width: 1080,
+      height: 1350
+    }
   };
   const faqSchema = article.faq?.length
     ? {

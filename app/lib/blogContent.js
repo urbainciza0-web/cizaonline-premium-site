@@ -129,6 +129,19 @@ const baseBlogArticles = [
 
 export const blogArticles = [...baseBlogArticles, ...longSeoArticleSummaries];
 
+export function getArticleSlug(article) {
+  return String(article?.href || "").replace(/^\/blog\//, "");
+}
+
+export function getArticleImageUrl(articleOrSlug) {
+  const slug = typeof articleOrSlug === "string" ? articleOrSlug : getArticleSlug(articleOrSlug);
+  return `${siteUrl}/blog-images/${slug}`;
+}
+
+export function getBlogArticleBySlug(slug) {
+  return blogArticles.find((article) => getArticleSlug(article) === slug);
+}
+
 export const metricoolSocialPosts = [
   {
     articleSlug: "creer-compte-binance-rdc",
