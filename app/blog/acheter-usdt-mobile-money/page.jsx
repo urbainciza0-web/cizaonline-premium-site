@@ -1,9 +1,13 @@
 import Link from "next/link";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 export const metadata = {
-  title: "Acheter USDT avec Mobile Money | Guide Blog CizaOnline",
-  description: "Guide educatif pour acheter USDT avec Mobile Money: reseaux, P2P, vendeurs, preuves de paiement et securite en Afrique francophone.",
-  alternates: { canonical: "/blog/acheter-usdt-mobile-money" }
+  ...buildArticleSocialMetadata({
+    slug: "acheter-usdt-mobile-money",
+    title: "Acheter USDT avec Mobile Money | Guide Blog CizaOnline",
+    description: "Guide educatif pour acheter USDT avec Mobile Money: reseaux, P2P, vendeurs, preuves de paiement et securite en Afrique francophone.",
+    keywords: ["acheter USDT Mobile Money", "USDT RDC", "Binance P2P USDT", "Mobile Money crypto"]
+  })
 };
 
 export default function AcheterUsdtMobileMoneyArticle() {

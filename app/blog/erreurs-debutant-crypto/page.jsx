@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/erreurs-debutant-crypto",
@@ -38,10 +39,12 @@ const article = {
 };
 
 export const metadata = {
-  title: "Erreurs a eviter en crypto | Guide debutant CizaOnline",
-  description: "Les erreurs a eviter quand on debute en crypto : faux supports, mauvais reseau, securite faible, promesses de gains et achat impulsif.",
-  keywords: ["erreurs crypto debutant", "securite crypto", "debuter crypto RDC", "arnaques crypto", "CizaOnline"],
-  alternates: { canonical: "/blog/erreurs-debutant-crypto" }
+  ...buildArticleSocialMetadata({
+    slug: "erreurs-debutant-crypto",
+    title: "Erreurs a eviter en crypto | Guide debutant CizaOnline",
+    description: "Les erreurs a eviter quand on debute en crypto : faux supports, mauvais reseau, securite faible, promesses de gains et achat impulsif.",
+    keywords: ["erreurs crypto debutant", "securite crypto", "debuter crypto RDC", "arnaques crypto", "CizaOnline"]
+  })
 };
 
 export default function ErreursDebutantCryptoPage() {

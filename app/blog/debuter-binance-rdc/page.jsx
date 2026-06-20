@@ -1,9 +1,13 @@
 import Link from "next/link";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 export const metadata = {
-  title: "Comment debuter avec Binance en RDC | CizaOnline",
-  description: "Guide debutant pour utiliser Binance en RDC: compte, securite, verification, P2P, USDT, Mobile Money et bonnes pratiques a Kinshasa, Goma et Lubumbashi.",
-  alternates: { canonical: "/blog/debuter-binance-rdc" }
+  ...buildArticleSocialMetadata({
+    slug: "debuter-binance-rdc",
+    title: "Comment debuter avec Binance en RDC | CizaOnline",
+    description: "Guide debutant pour utiliser Binance en RDC: compte, securite, verification, P2P, USDT, Mobile Money et bonnes pratiques a Kinshasa, Goma et Lubumbashi.",
+    keywords: ["debuter Binance RDC", "formation Binance RDC", "compte Binance Congo", "Binance P2P"]
+  })
 };
 
 export default function DebuterBinanceRdcArticle() {

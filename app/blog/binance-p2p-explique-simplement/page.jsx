@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/binance-p2p-explique-simplement",
@@ -38,10 +39,12 @@ const article = {
 };
 
 export const metadata = {
-  title: "Binance P2P explique simplement | CizaOnline",
-  description: "Comprendre Binance P2P simplement : annonces, vendeurs, Mobile Money, preuves, erreurs a eviter et bonnes pratiques pour debutants en RDC.",
-  keywords: ["Binance P2P RDC", "P2P crypto", "Mobile Money Binance", "USDT P2P", "CizaOnline Binance"],
-  alternates: { canonical: "/blog/binance-p2p-explique-simplement" }
+  ...buildArticleSocialMetadata({
+    slug: "binance-p2p-explique-simplement",
+    title: "Binance P2P explique simplement | CizaOnline",
+    description: "Comprendre Binance P2P simplement : annonces, vendeurs, Mobile Money, preuves, erreurs a eviter et bonnes pratiques pour debutants en RDC.",
+    keywords: ["Binance P2P RDC", "P2P crypto", "Mobile Money Binance", "USDT P2P", "CizaOnline Binance"]
+  })
 };
 
 export default function BinanceP2PExpliquePage() {

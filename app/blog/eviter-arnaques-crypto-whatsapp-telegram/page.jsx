@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/eviter-arnaques-crypto-whatsapp-telegram",
@@ -39,11 +40,13 @@ const article = {
 };
 
 export const metadata = {
-  title: "Eviter les arnaques crypto WhatsApp et Telegram | CizaOnline",
-  description:
-    "Guide securite pour eviter les arnaques crypto sur WhatsApp et Telegram: faux supports, liens suspects, promesses de gains et bons reflexes.",
-  keywords: ["arnaque crypto WhatsApp", "arnaque Telegram crypto", "faux support Binance", "securite crypto RDC"],
-  alternates: { canonical: "/blog/eviter-arnaques-crypto-whatsapp-telegram" }
+  ...buildArticleSocialMetadata({
+    slug: "eviter-arnaques-crypto-whatsapp-telegram",
+    title: "Eviter les arnaques crypto WhatsApp et Telegram | CizaOnline",
+    description:
+      "Guide securite pour eviter les arnaques crypto sur WhatsApp et Telegram: faux supports, liens suspects, promesses de gains et bons reflexes.",
+    keywords: ["arnaque crypto WhatsApp", "arnaque Telegram crypto", "faux support Binance", "securite crypto RDC"]
+  })
 };
 
 export default function EviterArnaquesCryptoWhatsappTelegramPage() {

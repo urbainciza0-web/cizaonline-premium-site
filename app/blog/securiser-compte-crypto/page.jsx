@@ -1,9 +1,13 @@
 import Link from "next/link";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 export const metadata = {
-  title: "Securiser son compte crypto | CizaOnline",
-  description: "Checklist de securite crypto: Binance, wallets, 2FA, seed phrase, mots de passe, WhatsApp, Telegram et erreurs a eviter pour les debutants.",
-  alternates: { canonical: "/blog/securiser-compte-crypto" }
+  ...buildArticleSocialMetadata({
+    slug: "securiser-compte-crypto",
+    title: "Securiser son compte crypto | CizaOnline",
+    description: "Checklist de securite crypto: Binance, wallets, 2FA, seed phrase, mots de passe, WhatsApp, Telegram et erreurs a eviter pour les debutants.",
+    keywords: ["securiser compte crypto", "2FA Binance", "seed phrase", "securite wallet"]
+  })
 };
 
 export default function SecuriserCompteCryptoArticle() {

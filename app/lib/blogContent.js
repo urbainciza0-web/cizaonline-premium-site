@@ -136,11 +136,45 @@ export function getArticleSlug(article) {
 
 export function getArticleImageUrl(articleOrSlug) {
   const slug = typeof articleOrSlug === "string" ? articleOrSlug : getArticleSlug(articleOrSlug);
-  return `${siteUrl}${instagramImagePath}/${slug}`;
+  return `${siteUrl}${instagramImagePath}/${slug}?v=2`;
 }
 
 export function getBlogArticleBySlug(slug) {
   return blogArticles.find((article) => getArticleSlug(article) === slug);
+}
+
+export function buildArticleSocialMetadata({ slug, title, description, keywords = [] }) {
+  const imageUrl = getArticleImageUrl(slug);
+  const canonical = `/blog/${slug}`;
+
+  return {
+    title,
+    description,
+    keywords,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}${canonical}`,
+      siteName: "CizaOnline",
+      locale: "fr_FR",
+      type: "article",
+      images: [
+        {
+          url: imageUrl,
+          width: 1080,
+          height: 1350,
+          alt: title
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl]
+    }
+  };
 }
 
 export const metricoolSocialPosts = [

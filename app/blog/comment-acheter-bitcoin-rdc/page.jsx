@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/comment-acheter-bitcoin-rdc",
@@ -38,10 +39,12 @@ const article = {
 };
 
 export const metadata = {
-  title: "Comment acheter du Bitcoin en RDC ? | CizaOnline",
-  description: "Guide CizaOnline pour acheter du Bitcoin en RDC avec prudence : P2P, Mobile Money, frais, securite, compte crypto et accompagnement debutant.",
-  keywords: ["acheter Bitcoin RDC", "Bitcoin Congo", "crypto RDC", "Mobile Money Bitcoin", "CizaOnline"],
-  alternates: { canonical: "/blog/comment-acheter-bitcoin-rdc" }
+  ...buildArticleSocialMetadata({
+    slug: "comment-acheter-bitcoin-rdc",
+    title: "Comment acheter du Bitcoin en RDC ? | CizaOnline",
+    description: "Guide CizaOnline pour acheter du Bitcoin en RDC avec prudence : P2P, Mobile Money, frais, securite, compte crypto et accompagnement debutant.",
+    keywords: ["acheter Bitcoin RDC", "Bitcoin Congo", "crypto RDC", "Mobile Money Bitcoin", "CizaOnline"]
+  })
 };
 
 export default function CommentAcheterBitcoinRdcPage() {

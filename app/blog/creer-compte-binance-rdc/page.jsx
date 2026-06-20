@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/creer-compte-binance-rdc",
@@ -39,11 +40,13 @@ const article = {
 };
 
 export const metadata = {
-  title: "Creer un compte Binance en RDC en 2026 | CizaOnline",
-  description:
-    "Guide pour creer un compte Binance en RDC en 2026: email, mot de passe, verification, securite, 2FA, faux supports et bonnes pratiques debutant.",
-  keywords: ["creer compte Binance RDC", "ouvrir Binance Congo", "verification Binance RDC", "Binance debutant"],
-  alternates: { canonical: "/blog/creer-compte-binance-rdc" }
+  ...buildArticleSocialMetadata({
+    slug: "creer-compte-binance-rdc",
+    title: "Creer un compte Binance en RDC en 2026 | CizaOnline",
+    description:
+      "Guide pour creer un compte Binance en RDC en 2026: email, mot de passe, verification, securite, 2FA, faux supports et bonnes pratiques debutant.",
+    keywords: ["creer compte Binance RDC", "ouvrir Binance Congo", "verification Binance RDC", "Binance debutant"]
+  })
 };
 
 export default function CreerCompteBinanceRdcPage() {

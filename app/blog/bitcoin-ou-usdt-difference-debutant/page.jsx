@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/bitcoin-ou-usdt-difference-debutant",
@@ -39,11 +40,13 @@ const article = {
 };
 
 export const metadata = {
-  title: "Bitcoin ou USDT : difference pour debutant | CizaOnline",
-  description:
-    "Guide simple pour comprendre la difference entre Bitcoin et USDT: volatilite, stablecoin, usage, risque et debut crypto en RDC.",
-  keywords: ["Bitcoin ou USDT", "difference Bitcoin USDT", "stablecoin USDT", "crypto debutant RDC"],
-  alternates: { canonical: "/blog/bitcoin-ou-usdt-difference-debutant" }
+  ...buildArticleSocialMetadata({
+    slug: "bitcoin-ou-usdt-difference-debutant",
+    title: "Bitcoin ou USDT : difference pour debutant | CizaOnline",
+    description:
+      "Guide simple pour comprendre la difference entre Bitcoin et USDT: volatilite, stablecoin, usage, risque et debut crypto en RDC.",
+    keywords: ["Bitcoin ou USDT", "difference Bitcoin USDT", "stablecoin USDT", "crypto debutant RDC"]
+  })
 };
 
 export default function BitcoinOuUsdtDifferenceDebutantPage() {

@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/acheter-usdt-rdc-binance-p2p",
@@ -39,11 +40,13 @@ const article = {
 };
 
 export const metadata = {
-  title: "Acheter USDT en RDC avec Binance P2P | CizaOnline",
-  description:
-    "Guide CizaOnline pour acheter USDT en RDC avec Binance P2P: annonces, Mobile Money, vendeurs, preuves, reseaux et securite.",
-  keywords: ["acheter USDT RDC", "Binance P2P RDC", "USDT Mobile Money", "acheter USDT Congo"],
-  alternates: { canonical: "/blog/acheter-usdt-rdc-binance-p2p" }
+  ...buildArticleSocialMetadata({
+    slug: "acheter-usdt-rdc-binance-p2p",
+    title: "Acheter USDT en RDC avec Binance P2P | CizaOnline",
+    description:
+      "Guide CizaOnline pour acheter USDT en RDC avec Binance P2P: annonces, Mobile Money, vendeurs, preuves, reseaux et securite.",
+    keywords: ["acheter USDT RDC", "Binance P2P RDC", "USDT Mobile Money", "acheter USDT Congo"]
+  })
 };
 
 export default function AcheterUsdtRdcBinanceP2pPage() {

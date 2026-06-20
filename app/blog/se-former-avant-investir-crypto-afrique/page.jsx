@@ -1,4 +1,5 @@
 import ArticleLayout from "../ArticleLayout";
+import { buildArticleSocialMetadata } from "../../lib/blogContent.js";
 
 const article = {
   slug: "blog/se-former-avant-investir-crypto-afrique",
@@ -39,11 +40,13 @@ const article = {
 };
 
 export const metadata = {
-  title: "Se former avant d'investir en crypto en Afrique | CizaOnline",
-  description:
-    "Pourquoi suivre une formation crypto avant d'investir en Afrique: securite, vocabulaire, wallet, P2P, gestion du risque et discipline.",
-  keywords: ["formation crypto Afrique", "investir crypto Afrique", "formation crypto RDC", "debuter crypto"],
-  alternates: { canonical: "/blog/se-former-avant-investir-crypto-afrique" }
+  ...buildArticleSocialMetadata({
+    slug: "se-former-avant-investir-crypto-afrique",
+    title: "Se former avant d'investir en crypto en Afrique | CizaOnline",
+    description:
+      "Pourquoi suivre une formation crypto avant d'investir en Afrique: securite, vocabulaire, wallet, P2P, gestion du risque et discipline.",
+    keywords: ["formation crypto Afrique", "investir crypto Afrique", "formation crypto RDC", "debuter crypto"]
+  })
 };
 
 export default function SeFormerAvantInvestirCryptoAfriquePage() {

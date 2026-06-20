@@ -32,7 +32,7 @@ function buildRssFeed() {
       <guid isPermaLink="true">${escapeXml(url)}</guid>
       <description>${escapeXml(article.description)}</description>
       <pubDate>${formatRssDate(article.publishedAt)}</pubDate>
-      <enclosure url="${escapeXml(imageUrl)}" length="0" type="image/png" />
+      <enclosure url="${escapeXml(imageUrl)}" length="1200000" type="image/png" />
       <media:content url="${escapeXml(imageUrl)}" medium="image" type="image/png" width="1080" height="1350" />
       ${categories.map((category) => `<category>${escapeXml(category)}</category>`).join("\n      ")}
     </item>`;
