@@ -204,10 +204,13 @@ function LogoMark({ compact = false }) {
   return (
     <span className="group/logo flex items-center gap-3">
       <span className="logo-mark relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border border-ciza-gold/40 bg-black text-ciza-gold shadow-gold">
-        <span className="absolute inset-1 rounded-[0.85rem] border border-white/10" />
-        <span className="absolute h-12 w-12 rounded-full border border-ciza-gold/25" />
-        <span className="absolute h-5 w-5 rounded-full bg-ciza-gold/18 blur-md" />
-        <span className="relative font-display text-lg font-black">C</span>
+        <Image
+          src="/images/cizaonline-logo.png"
+          alt=""
+          fill
+          sizes="44px"
+          className="object-contain p-0.5"
+        />
       </span>
       {compact ? null : (
         <span>
