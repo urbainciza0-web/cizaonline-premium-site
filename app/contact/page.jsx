@@ -9,7 +9,7 @@ const contactEmail = "contact@cizaonline.com";
 
 export const metadata = {
   title: "Contact CizaOnline | Formation crypto RDC",
-  description: "Contactez CizaOnline pour une formation crypto, un accompagnement Binance, un abonnement premium ou une demande liee a la crypto en Afrique francophone.",
+  description: "Contactez CizaOnline pour une formation crypto, un accompagnement Binance, un accès gratuit Binance ou une demande liee a la crypto en Afrique francophone.",
   alternates: { canonical: "/contact" }
 };
 
@@ -23,7 +23,7 @@ export default function ContactPage() {
             Parler avec CizaOnline
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/70">
-            Une question sur la formation crypto, Binance, le P2P, l&apos;abonnement premium ou un accompagnement ? Laisse tes coordonnees ou utilise WhatsApp.
+            Une question sur la formation crypto, Binance, le P2P, l&apos;accès gratuit Binance ou un accompagnement ? Laisse tes coordonnees ou utilise WhatsApp.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="premium-button inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-black text-black">

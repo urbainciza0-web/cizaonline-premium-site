@@ -62,7 +62,7 @@ const page = {
     {
       title: "Parcours recommandé avec CizaOnline",
       paragraphs: [
-        "Un bon parcours commence par les pages éducatives : débuter crypto en Afrique, acheter Bitcoin en RDC, acheter USDT par Mobile Money RDC et formation Binance RDC. Ensuite, l'utilisateur peut rejoindre l'espace Premium 6$/mois ou demander une formation sur rendez-vous s'il veut un accompagnement plus direct. Cette progression évite de transformer une interface complexe en source de stress.",
+        "Un bon parcours commence par les pages éducatives : débuter crypto en Afrique, acheter Bitcoin en RDC, acheter USDT par Mobile Money RDC et formation Binance RDC. Ensuite, l'utilisateur peut rejoindre l'accès gratuit Binance ou demander une formation sur rendez-vous s'il veut un accompagnement plus direct. Cette progression évite de transformer une interface complexe en source de stress.",
         "CizaOnline rappelle que ce guide est éducatif. Il ne constitue pas un conseil financier personnalisé. L'utilisateur doit rester prudent, vérifier les informations à jour dans l'application officielle et ne jamais investir ce qu'il ne peut pas se permettre de perdre. La meilleure compétence d'un débutant n'est pas d'aller vite, mais de comprendre assez pour éviter les erreurs simples." 
       ],
       items: ["Lire les guides", "Tester petit", "Demander de l'aide", "Progresser avec méthode"]

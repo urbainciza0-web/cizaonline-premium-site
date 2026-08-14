@@ -64,7 +64,7 @@ const page = {
         "CizaOnline n'a pas vocation à remplacer le jugement personnel de l'utilisateur. La plateforme fournit des guides, des explications, un espace Premium, des appels à l'action WhatsApp et des formations sur rendez-vous. L'utilisateur reste responsable de ses décisions financières. Cette transparence renforce la crédibilité du site et évite les promesses irréalistes que l'on trouve souvent dans l'écosystème crypto.",
         "Pour débuter correctement, le meilleur chemin consiste à lire les guides, sauvegarder les termes importants, poser des questions, commencer avec des montants faibles et progresser avec méthode. La crypto récompense moins la précipitation que la compréhension. C'est exactement l'approche que CizaOnline veut promouvoir en Afrique francophone." 
       ],
-      items: ["Guides gratuits", "Premium 6$/mois", "Formation sur rendez-vous", "Support WhatsApp"]
+      items: ["Guides gratuits", "Accès gratuit Binance", "Formation sur rendez-vous", "Support WhatsApp"]
     }
   ],
   faqs: [
@@ -79,7 +79,7 @@ const page = {
     { label: "Acheter USDT Mobile Money RDC", href: "/acheter-usdt-mobile-money-rdc" },
     { label: "Formation Binance RDC", href: "/formation-binance-rdc" },
     { label: "Guide complet Binance débutants", href: "/guide-complet-binance-debutants" },
-    { label: "Espace Premium 6$/mois", href: "/espace-premium" }
+    { label: "Accès gratuit Binance", href: "/espace-premium" }
   ]
 };
 

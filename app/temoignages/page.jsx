@@ -85,7 +85,7 @@ export default function TemoignagesPage() {
       </section>
       <section className="mx-auto mt-14 flex max-w-7xl flex-col gap-3 rounded-[1.5rem] border border-ciza-gold/20 bg-white/[0.035] p-6 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="font-display text-2xl font-black text-white">Tu veux rejoindre les prochains apprenants ?</h2>
-        <div className="flex flex-col gap-3 sm:flex-row"><a href="https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20rejoindre%20la%20formation%20crypto." target="_blank" rel="noopener noreferrer" className="premium-button inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-black text-black"><MessageCircle className="h-4 w-4" />WhatsApp</a><Link href="/espace-premium" className="inline-flex min-h-[3.25rem] items-center justify-center rounded-full border border-ciza-gold/25 px-6 py-3 text-sm font-bold text-white">Espace Premium 6$/mois</Link></div>
+        <div className="flex flex-col gap-3 sm:flex-row"><a href="https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20rejoindre%20la%20formation%20crypto." target="_blank" rel="noopener noreferrer" className="premium-button inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-black text-black"><MessageCircle className="h-4 w-4" />WhatsApp</a><Link href="/espace-premium" className="inline-flex min-h-[3.25rem] items-center justify-center rounded-full border border-ciza-gold/25 px-6 py-3 text-sm font-bold text-white">Accès gratuit Binance</Link></div>
       </section>
     </main>
   );

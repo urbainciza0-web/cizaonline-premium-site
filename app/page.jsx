@@ -39,12 +39,12 @@ const contactPhone = "+243834783307";
 const contactEmail = "contact@cizaonline.com";
 const telegramUrl = "https://t.me/+qWeBitmp1OcxMjI0";
 const paymentUrl =
-  "https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=fr&ref=GRO_28502_48A90&utm_source=referral_entrance";
+  "https://www.binance.com/join?ref=CIZAONLINE";
 const binanceAcademyUrl = "https://www.binance.com/fr/academy";
 const appointmentUrl =
   "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20r%C3%A9server%20la%20formation%20crypto%20%C3%A0%2050%24";
 const enterpriseUrl =
-  "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20un%20accompagnement%20entreprise%20%C3%A0%201000%24";
+  "https://wa.me/243834783307?text=Bonjour%20CizaOnline%2C%20je%20veux%20un%20accompagnement%20entreprise%20%C3%A0%201270%24";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -70,7 +70,7 @@ const socialProof = [
   { value: "5 000+", label: "membres formes", detail: "Afrique francophone" },
   { value: "120+", label: "retours verifies", detail: "WhatsApp et Telegram" },
   { value: "24/7", label: "veille marche", detail: "BTC, ETH, USDT, BNB" },
-  { value: "6$", label: "acces mensuel", detail: "abonnement clair" }
+  { value: "0$", label: "acces gratuit", detail: "inscription Binance" }
 ];
 
 const markets = [
@@ -104,9 +104,9 @@ const pricingPlans = [
     title: "Découverte crypto gratuite",
     price: "0$",
     description:
-      "Accès aux ressources gratuites de Binance Academy pour apprendre les bases de la crypto, blockchain, sécurité et Web3.",
-    button: "Commencer gratuitement",
-    href: binanceAcademyUrl,
+      "Crée gratuitement ton compte Binance avec le lien CizaOnline, puis accède aux ressources éducatives pour apprendre la crypto, la sécurité et le Web3.",
+    button: "Créer gratuitement mon compte Binance",
+    href: paymentUrl,
     Icon: BookOpenCheck,
     badge: "Ressources gratuites"
   },
@@ -122,7 +122,7 @@ const pricingPlans = [
   },
   {
     title: "Accompagnement Entreprise",
-    price: "1000$",
+    price: "1270$",
     description:
       "Accompagnement premium destiné aux entreprises, organisations, équipes et projets qui veulent comprendre, intégrer ou former leur personnel sur l’écosystème crypto, Binance, stablecoins, sécurité, paiements numériques, P2P et Web3.",
     button: "Demander un accompagnement entreprise",
@@ -421,7 +421,7 @@ export default function HomePage() {
                 </a>
               ))}
               <a href={paymentUrl} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="mt-2 rounded-2xl bg-ciza-gold px-4 py-3 text-center text-sm font-black text-black">
-                Rejoindre pour 6$/mois
+                Créer gratuitement mon compte Binance
               </a>
             </div>
           </motion.div>
@@ -453,7 +453,7 @@ export default function HomePage() {
               ))}
             </motion.div>
             <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <PrimaryButton href={paymentUrl}>Rejoindre pour 6$/mois</PrimaryButton>
+              <PrimaryButton href={paymentUrl}>Créer gratuitement mon compte Binance</PrimaryButton>
               <SecondaryButton href="#terminal">
                 <Radar className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
                 Voir le terminal
@@ -625,14 +625,14 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-8">
-              <p className="text-sm font-semibold text-white/56">A partir de</p>
-              <p className="mt-1 font-display text-5xl font-black text-white sm:text-6xl">6$<span className="text-lg text-white/46">/mois</span></p>
+              <p className="text-sm font-semibold text-white/56">Accès</p>
+              <p className="mt-1 font-display text-5xl font-black text-white sm:text-6xl">Gratuit</p>
               <p className="mt-4 leading-7 text-white/64">
-                Une porte d'entree premium pour apprendre avec une communaute serieuse, des ressources utiles et un cadre qui protege ton capital.
+                Une porte d'entree gratuite pour créer ton compte Binance, apprendre avec des ressources utiles et avancer avec méthode.
               </p>
             </div>
             <div className="mt-8 grid gap-3">
-              <PrimaryButton href={paymentUrl}>Demander l'acces maintenant</PrimaryButton>
+              <PrimaryButton href={paymentUrl}>Créer mon compte Binance</PrimaryButton>
               <SecondaryButton href={whatsappUrl}>
                 <MessageCircle className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
                 Parler a l'equipe
@@ -708,7 +708,7 @@ export default function HomePage() {
 
           <div className="mt-8 grid gap-3 rounded-[1.25rem] border border-white/10 bg-black/28 p-4 text-sm leading-6 text-white/56 shadow-panel sm:rounded-[1.5rem] sm:p-5 md:grid-cols-2">
             <p>
-              CizaOnline n’est pas affilié officiellement à Binance. Binance Academy est une ressource éducative gratuite proposée par Binance.
+              CizaOnline participe au programme d’affiliation Binance. Une inscription via nos liens peut générer une commission, sans coût supplémentaire pour l’utilisateur.
             </p>
             <p>
               Education crypto uniquement. Pas de conseil financier individualisé.
@@ -879,7 +879,7 @@ export default function HomePage() {
               Rejoins CizaOnline et avance avec methode, prudence et accompagnement.
             </p>
             <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-4 lg:mx-0">
-              <PrimaryButton href={paymentUrl}>Rejoindre pour 6$/mois</PrimaryButton>
+              <PrimaryButton href={paymentUrl}>Créer gratuitement mon compte Binance</PrimaryButton>
               <SecondaryButton href={telegramUrl}>
                 <Orbit className="h-4 w-4 text-ciza-gold" aria-hidden="true" />
                 Voir le canal

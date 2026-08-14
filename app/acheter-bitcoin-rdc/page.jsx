@@ -62,9 +62,9 @@ const page = {
       title: "Comment CizaOnline aide les débutants crypto en Afrique francophone",
       paragraphs: [
         "CizaOnline combine guides, pages pratiques, WhatsApp, espace premium et formation sur rendez-vous. Le but n'est pas de pousser l'utilisateur à acheter n'importe quoi, mais de créer une base solide : vocabulaire, sécurité, compréhension de Binance, lecture du P2P, gestion des erreurs et discipline. Les utilisateurs de Kinshasa, Goma, Lubumbashi ou de la diaspora francophone peuvent utiliser les ressources pour apprendre à leur rythme puis demander un accompagnement si une étape reste floue.",
-        "Pour aller plus loin, les liens internes de cette page orientent vers l'offre Premium 6$/mois, la formation crypto francophone, le guide Binance RDC, la page FAQ et les pages USDT. Cette structure de maillage aide aussi Google à comprendre le rôle de CizaOnline : une plateforme éducative crypto francophone centrée sur la RDC et l'Afrique, avec un langage accessible et une approche prudente."
+        "Pour aller plus loin, les liens internes de cette page orientent vers l'offre Accès gratuit Binance, la formation crypto francophone, le guide Binance RDC, la page FAQ et les pages USDT. Cette structure de maillage aide aussi Google à comprendre le rôle de CizaOnline : une plateforme éducative crypto francophone centrée sur la RDC et l'Afrique, avec un langage accessible et une approche prudente."
       ],
-      items: ["Espace Premium 6$/mois", "Formation sur rendez-vous", "Guides Binance et USDT", "Support WhatsApp"]
+      items: ["Accès gratuit Binance", "Formation sur rendez-vous", "Guides Binance et USDT", "Support WhatsApp"]
     }
   ],
   faqs: [
@@ -78,7 +78,7 @@ const page = {
     { label: "Acheter USDT par Mobile Money RDC", href: "/acheter-usdt-mobile-money-rdc" },
     { label: "Formation Binance RDC", href: "/formation-binance-rdc" },
     { label: "Guide Binance RDC", href: "/guide-binance-rdc" },
-    { label: "Espace Premium 6$/mois", href: "/espace-premium" },
+    { label: "Accès gratuit Binance", href: "/espace-premium" },
     { label: "FAQ CizaOnline", href: "/faq-cizaonline" }
   ]
 };
