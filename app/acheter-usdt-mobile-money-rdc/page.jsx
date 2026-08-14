@@ -62,7 +62,7 @@ const page = {
     {
       title: "Comment CizaOnline accompagne l'achat d'USDT",
       paragraphs: [
-        "CizaOnline propose des ressources pour comprendre l'USDT, Binance, le P2P, Mobile Money et les bases de sécurité. Les utilisateurs peuvent consulter l'espace Premium 6$/mois, réserver une formation sur rendez-vous ou lire les autres guides du site. Le rôle de CizaOnline est pédagogique : rendre les étapes compréhensibles, aider à poser les bonnes questions et réduire les erreurs de débutant.",
+        "CizaOnline propose des ressources pour comprendre l'USDT, Binance, le P2P, Mobile Money et les bases de sécurité. Les utilisateurs peuvent consulter l'accès gratuit Binance, réserver une formation sur rendez-vous ou lire les autres guides du site. Le rôle de CizaOnline est pédagogique : rendre les étapes compréhensibles, aider à poser les bonnes questions et réduire les erreurs de débutant.",
         "Cette page renvoie vers le guide Bitcoin RDC, la formation Binance RDC, la FAQ et les offres CizaOnline afin de construire un parcours complet. Un utilisateur peut commencer par lire, puis comparer, puis poser une question sur WhatsApp avant de faire une opération réelle. Cette progression lente est volontaire : elle protège mieux qu'une décision impulsive." 
       ]
     }
@@ -78,7 +78,7 @@ const page = {
     { label: "Acheter Bitcoin en RDC", href: "/acheter-bitcoin-rdc" },
     { label: "Formation Binance RDC", href: "/formation-binance-rdc" },
     { label: "Guide Binance pour débutants", href: "/guide-complet-binance-debutants" },
-    { label: "Espace Premium 6$/mois", href: "/espace-premium" },
+    { label: "Accès gratuit Binance", href: "/espace-premium" },
     { label: "FAQ CizaOnline", href: "/faq-cizaonline" }
   ]
 };

@@ -6,7 +6,7 @@ import { Mail } from "lucide-react";
 const interestOptions = [
   "Formation crypto",
   "Accompagnement Binance",
-  "Abonnement premium",
+  "Accès gratuit Binance",
   "Autre"
 ];
 

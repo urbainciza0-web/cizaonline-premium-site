@@ -57,7 +57,7 @@ const page = {
         "CizaOnline propose des ressources gratuites, un espace Premium à 6$/mois et une formation sur rendez-vous à 50$ selon la logique existante du site. L'espace Premium peut servir de point d'entrée pour suivre les contenus, poser des questions et progresser régulièrement. La formation sur rendez-vous est plus ciblée : elle permet de traiter les questions d'un utilisateur, de revoir une procédure et de clarifier les erreurs à éviter avant une manipulation réelle.",
         "Le parcours conseillé est simple : lire les guides, consulter la FAQ, rejoindre l'offre adaptée, puis demander un accompagnement WhatsApp si une étape bloque. CizaOnline ne vend pas une certitude financière. Il vend de la clarté, de la méthode et un cadre pédagogique pour que l'utilisateur ne soit pas seul devant une interface complexe." 
       ],
-      items: ["Premium 6$/mois", "Formation 50$ sur rendez-vous", "Support WhatsApp", "Guides SEO gratuits"]
+      items: ["Accès gratuit Binance", "Formation 50$ sur rendez-vous", "Support WhatsApp", "Guides SEO gratuits"]
     },
     {
       title: "Résultat attendu après la formation",
@@ -79,7 +79,7 @@ const page = {
     { label: "Acheter USDT Mobile Money RDC", href: "/acheter-usdt-mobile-money-rdc" },
     { label: "Acheter Bitcoin en RDC", href: "/acheter-bitcoin-rdc" },
     { label: "Formation crypto Afrique francophone", href: "/formation-crypto-afrique-francophone" },
-    { label: "Espace Premium 6$/mois", href: "/espace-premium" }
+    { label: "Accès gratuit Binance", href: "/espace-premium" }
   ]
 };
 

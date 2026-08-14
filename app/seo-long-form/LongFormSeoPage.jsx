@@ -68,7 +68,7 @@ export default function LongFormSeoPage({ page }) {
                   href="/espace-premium"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d7a84f] px-6 py-3 text-sm font-black text-black shadow-[0_18px_55px_rgba(215,168,79,0.25)] transition hover:-translate-y-0.5 hover:bg-[#f4ca68]"
                 >
-                  Espace Premium 6$/mois <ArrowRight className="h-4 w-4" />
+                  Accès gratuit Binance <ArrowRight className="h-4 w-4" />
                 </Link>
                 <WhatsAppLink
                   text={page.whatsappText}

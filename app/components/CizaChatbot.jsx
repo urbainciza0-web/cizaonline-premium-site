@@ -10,7 +10,7 @@ const quickQuestions = [
   "Comment s'inscrire sur Binance ?",
   "Comment acheter des USDT ?",
   "Comment rejoindre CizaOnline ?",
-  "Combien coute l'abonnement ?",
+  "L’accès Binance est-il gratuit ?",
   "Comment contacter l'equipe ?"
 ];
 
@@ -37,14 +37,14 @@ function getAnswer(question) {
   }
 
   if (normalized.includes("cout") || normalized.includes("prix") || normalized.includes("abonnement") || normalized.includes("premium")) {
-    return "L'espace Premium est presente a 6$/mois. Certaines formations ou accompagnements peuvent avoir un tarif different selon le besoin. Le plus simple est de confirmer ton cas avec l'equipe sur WhatsApp.";
+    return "La création du compte Binance via CizaOnline est gratuite. La formation personnalisée reste à 50$ et l’accompagnement Entreprise à 1270$. Tu peux confirmer ton besoin avec l’équipe sur WhatsApp.";
   }
 
   if (normalized.includes("contact") || normalized.includes("whatsapp") || normalized.includes("email") || normalized.includes("equipe")) {
     return "Tu peux contacter CizaOnline via les boutons WhatsApp du site ou depuis la page Contact. Pour une question personnelle, WhatsApp est le canal le plus rapide.";
   }
 
-  return "Je peux repondre aux questions simples sur Binance, USDT, l'abonnement Premium et le contact CizaOnline. Pour une situation personnelle ou une operation crypto, je te conseille de parler a l'equipe sur WhatsApp.";
+  return "Je peux repondre aux questions simples sur Binance, USDT, l'accès gratuit Binance et le contact CizaOnline. Pour une situation personnelle ou une operation crypto, je te conseille de parler a l'equipe sur WhatsApp.";
 }
 
 export default function CizaChatbot() {

@@ -15,7 +15,7 @@ const seoNavigationLinks = [
   { label: "Formation Crypto", href: "/formation-crypto-afrique-francophone" },
   { label: "Blog", href: "/blog" },
   { label: "Market Pulse", href: "/actualites-bitcoin" },
-  { label: "Premium 6$", href: "/espace-premium" },
+  { label: "Accès gratuit", href: "/espace-premium" },
   { label: "Comparatif", href: "/comparatif-crypto-rdc" },
   { label: "Témoignages", href: "/temoignages" },
   { label: "FAQ", href: "/faq-cizaonline" },
@@ -84,7 +84,7 @@ const courseSchema = {
     {
       "@type": "Offer",
       name: "Accompagnement Entreprise",
-      price: "1000",
+      price: "1270",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: `${siteUrl}/#tarifs`
