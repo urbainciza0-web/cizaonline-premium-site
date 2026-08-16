@@ -332,7 +332,7 @@ export function getLongSeoArticleBySlug(slug) {
 }
 
 export const longSeoMetricoolSocialPosts = longSeoArticleSummaries.map((article) => {
-  const url = `https://cizaonline.com${article.href}`;
+  const url = `https://www.cizaonline.com${article.href}`;
   const topic = article.title;
 
   return {
