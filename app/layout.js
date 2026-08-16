@@ -1,7 +1,7 @@
 import "./globals.css";
 import CizaChatbot from "./components/CizaChatbot";
 
-const siteUrl = "https://cizaonline.com";
+const siteUrl = "https://www.cizaonline.com";
 const siteName = "CizaOnline";
 const seoTitle = "CizaOnline | Formation crypto premium en Afrique francophone";
 const seoDescription =
