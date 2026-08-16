@@ -8,16 +8,6 @@ function isVercelPreviewHost(hostname) {
 
 export function middleware(request) {
   const hostname = request.headers.get("host")?.split(":")[0]?.toLowerCase() || "";
-
-  if (hostname === "www.cizaonline.com") {
-    const canonicalUrl = request.nextUrl.clone();
-    canonicalUrl.protocol = "https:";
-    canonicalUrl.hostname = "cizaonline.com";
-    canonicalUrl.port = "";
-
-    return NextResponse.redirect(canonicalUrl, 301);
-  }
-
   const response = NextResponse.next();
 
   if (isVercelPreviewHost(hostname)) {
