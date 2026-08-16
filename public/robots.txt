@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cizaonline.com/sitemap.xml
-Sitemap: https://cizaonline.com/rss.xml
+Sitemap: https://www.cizaonline.com/sitemap.xml
+Sitemap: https://www.cizaonline.com/rss.xml
